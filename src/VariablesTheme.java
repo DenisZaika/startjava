@@ -51,5 +51,29 @@ public class VariablesTheme {
         System.out.println("Стоимость товаров без скидки: " + totalPriceBd.toPlainString() + " руб.");
         System.out.println("Сумма скидки: " + discountBd.toPlainString() + " руб.");
         System.out.println("Стоимость товаров со скидкой: " + finalPriceBd.toPlainString() + " руб.");
+
+        System.out.println("3. Перестановка значений ячеек в таблице");
+
+        System.out.println("4. Декодирование сообщения");
+        int firstCharCode = 1055;
+        int secondCharCode = 1088;
+        int thirdCharCode = 1080;
+        int fourthCharCode = 1074;
+        int fifthCharCode = 1077;
+        int sixthCharCode = 1090;
+        char firstChar = (char) firstCharCode;
+        char secondChar = (char) secondCharCode;
+        char thirdChar = (char) thirdCharCode;
+        char fourthChar = (char) fourthCharCode;
+        char fifthChar = (char) fifthCharCode;
+        char sixthChar = (char) sixthCharCode;
+        System.out.printf("%6d%6d%6d%6d%6d%6d\n", 
+                firstCharCode, secondCharCode, 
+                thirdCharCode, fourthCharCode, 
+                fifthCharCode, sixthCharCode);
+        System.out.printf("%6s%6s%6s%6s%6s%6s", 
+                (char) firstCharCode, (char) secondCharCode, 
+                (char) thirdCharCode, (char) fourthCharCode, 
+                (char) fifthCharCode, (char) sixthCharCode);
     };
 }
