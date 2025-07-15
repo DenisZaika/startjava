@@ -5,8 +5,8 @@ import java.time.format.DateTimeFormatter;
 
 public class VariablesTheme {
     public static void main(String[] args) {
-        LocalTime verificationStartTime = LocalTime.now();
-        var start = BigDecimal.valueOf(System.nanoTime());
+        final LocalTime verificationStartTime = LocalTime.now();
+        final var start = BigDecimal.valueOf(System.nanoTime());
 
         System.out.println("1. ВЫВОД ASCII-ГРАФИКИ");
         System.out.println("Вывод в консоль слова JAVA c помощью конкатенации:\n");
@@ -36,6 +36,7 @@ public class VariablesTheme {
         System.out.println("Сумма скидки: %f руб.".formatted(discount));
         System.out.println("Стоимость товаров со скидкой: %f руб.".formatted(finalPrice));
         System.out.println("\nВторой способ:");
+        
         // .add(b) - сумма
         // .subtract(b) - вычитание
         // .abs() -модуль
@@ -59,8 +60,28 @@ public class VariablesTheme {
         System.out.println("Стоимость товаров со скидкой: " + finalPriceBd.toPlainString() + " руб.");
 
         System.out.println("\n3. Перестановка значений ячеек в таблице");
+        int firstCell = 2;
+        int secondCell = 5;
+        System.out.println("\nМетод: третья переменная");
+        System.out.printf("Исходные данные: A1 = %d, B1 = %d", firstCell, secondCell);
+        int temp = firstCell;
+        firstCell = secondCell;
+        secondCell = temp;
+        System.out.printf("\nРезультат: A1 = %d, B1 = %d", firstCell, secondCell);
+        System.out.println("\n\nМетод: арифметические операции");
+        System.out.printf("Исходные данные: A1 = %d, B1 = %d", firstCell, secondCell);
+        firstCell += secondCell;
+        secondCell = firstCell - secondCell;
+        firstCell -= secondCell;
+        System.out.printf("\nРезультат: A1 = %d, B1 = %d", firstCell, secondCell);
+        System.out.println("\n\nМетод: побитовая операция ^");
+        System.out.printf("Исходные данные: A1 = %d, B1 = %d", firstCell, secondCell);
+        firstCell = firstCell ^ secondCell;
+        secondCell = firstCell ^ secondCell;
+        firstCell ^= secondCell;
+        System.out.printf("\nРезультат: A1 = %d, B1 = %d", firstCell, secondCell);
 
-        System.out.println("\n4. Декодирование сообщения");
+        System.out.println("\n\n4. Декодирование сообщения");
         int firstCharCode = 1055;
         int secondCharCode = 1088;
         int thirdCharCode = 1080;
@@ -195,7 +216,7 @@ public class VariablesTheme {
         System.out.println("\n8. Замер времени работы кода");
         LocalTime verificationEndTime = LocalTime.now();
         var finish = BigDecimal.valueOf(System.nanoTime());
-        var nanosecondsPerSecond = BigDecimal.valueOf(1000000000);
+        var nanosecondsPerSecond = BigDecimal.valueOf(1_000_000_000);
         var timeElapsed = finish.subtract(start).divide(nanosecondsPerSecond, 3, RoundingMode.HALF_UP);
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss:SSS");
         System.out.printf("""
