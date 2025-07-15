@@ -92,7 +92,63 @@ public class VariablesTheme {
                 Контрольная сумма = %d
                 Проверочный код = %d
                 """,
-                productCode, productCategory, productSubcategory,
-                packagingType, controlSum, virificationCode);
+                productCode,
+                productCategory,
+                productSubcategory,
+                packagingType,
+                controlSum,
+                virificationCode);
+
+        System.out.println("\n\n6. Тестирование датчиков перед запуском ракеты\n");
+        byte temperature = Byte.MAX_VALUE;
+        System.out.printf("""
+                [Температура, °C]:
+                  Исходное: %d
+                  +1: %d
+                  -1: %d
+                \n""",
+                temperature,
+                ++temperature,
+                --temperature);
+        short pressure = Short.MAX_VALUE;
+        System.out.printf("""
+                [Давление, Па]:
+                  Исходное: %d
+                  +1: %d
+                  -1: %d
+                \n""",
+                pressure,
+                ++pressure,
+                --pressure);
+        char systemStatusCode = Character.MAX_VALUE;
+        System.out.printf("""
+                [Код состояния системы]:
+                  Исходное: %d
+                  +1: %d
+                  -1: %d
+                \n""",
+                (int) systemStatusCode,
+                (int) ++systemStatusCode,
+                (int) --systemStatusCode);
+        int traveledDistance = Integer.MAX_VALUE;
+        System.out.printf("""
+                [Пройденное расстояние, м]:
+                  Исходное: %d
+                  +1: %d
+                  -1: %d
+                \n""",
+                traveledDistance,
+                ++traveledDistance,
+                --traveledDistance);
+        long flightDuration = Long.MAX_VALUE;
+        System.out.printf("""
+                [Время c момента старта, с]:
+                  Исходное: %d
+                  +1: %d
+                  -1: %d
+                """,
+                flightDuration,
+                ++flightDuration,
+                --flightDuration);
     }
 }
