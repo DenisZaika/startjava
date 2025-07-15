@@ -1,8 +1,13 @@
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 public class VariablesTheme {
     public static void main(String[] args) {
+        LocalTime verificationStartTime = LocalTime.now();
+        var start = BigDecimal.valueOf(System.nanoTime());
+
         System.out.println("1. ВЫВОД ASCII-ГРАФИКИ");
         System.out.println("Вывод в консоль слова JAVA c помощью конкатенации:\n");
         System.out.println(
@@ -32,12 +37,12 @@ public class VariablesTheme {
         System.out.println("Стоимость товаров со скидкой: %f руб.".formatted(finalPrice));
         System.out.println("\nВторой способ:");
         // .add(b) - сумма
-        // .substract(b) - вычитание
+        // .subtract(b) - вычитание
         // .abs() -модуль
         // .negate() - унарный минус
         // .multiply(b) умножение
         // .setScale(точность, RoundingMode.HALF_UP)
-        // .divide(b, точность RoundingMode.HALF_UP) - деление
+        // .divide(b, точность, RoundingMode.HALF_UP) - деление
         // .compareTo(b) == 0 - сравнение на равенство (true - если верно); < - если проверка на меньше
         // .intValueExact() - вывод целой части, для дроби уточнить округление
         // .short(byte)ValueExact(точность)
@@ -150,5 +155,56 @@ public class VariablesTheme {
                 flightDuration,
                 ++flightDuration,
                 --flightDuration);
+
+        System.out.println("\n\n7. Вывод параметров JVM и ОС");
+        Runtime runtime = Runtime.getRuntime();
+        int availableProcessors = runtime.availableProcessors();
+        var totalMemory = BigDecimal.valueOf(runtime.totalMemory() / (1024 * 1024));
+        var freeMemory = BigDecimal.valueOf(runtime.freeMemory() / (1024 * 1024));
+        var usedMemory = totalMemory.subtract(freeMemory);
+        var maxMemory = BigDecimal.valueOf(runtime.maxMemory() / (1024 * 1024));
+        System.out.printf("""
+                \nХарактеристики JVM:
+                  Доступное число ядер - %d
+                  Выделенная память - %s МБ
+                  Свободная память -%s МБ
+                  Используемая память - %s МБ
+                  Максимально доступная для выделения память - %s МБ
+                """,
+                availableProcessors,
+                totalMemory.setScale(1, RoundingMode.HALF_UP),
+                freeMemory.setScale(1, RoundingMode.HALF_UP),
+                usedMemory.setScale(1, RoundingMode.HALF_UP),
+                maxMemory.setScale(1, RoundingMode.HALF_UP));
+        String systemDisk = System.getProperty("user.dir");
+        String osVersion = System.getProperty("os.version");
+        String javaVersion = System.getProperty("java.version");
+        String fileSeparator = System.getProperty("file.separator");
+        System.out.printf("""
+                \nПараметры ОС:
+                  Системный диск: %s
+                  Версия ОС: %s
+                  Версия java: %s
+                  Символ разделения пути: %s
+                """,
+                systemDisk.charAt(0),
+                osVersion,
+                javaVersion,
+                fileSeparator);
+
+        System.out.println("\n8. Замер времени работы кода");
+        LocalTime verificationEndTime = LocalTime.now();
+        var finish = BigDecimal.valueOf(System.nanoTime());
+        var nanosecondsPerSecond = BigDecimal.valueOf(1000000000);
+        var timeElapsed = finish.subtract(start).divide(nanosecondsPerSecond, 3, RoundingMode.HALF_UP);
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss:SSS");
+        System.out.printf("""
+                Старт проверки: %s
+                Финиш проверки: %s
+                Время работы:   %s сек
+                """,
+                dtf.format(verificationStartTime),
+                dtf.format(verificationEndTime),
+                timeElapsed);
     }
 }
