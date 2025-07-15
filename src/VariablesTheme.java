@@ -41,7 +41,8 @@ public class VariablesTheme {
         // .compareTo(b) == 0 - сравнение на равенство (true - если верно); < - если проверка на меньше
         // .intValueExact() - вывод целой части, для дроби уточнить округление
         // .short(byte)ValueExact(точность)
-        // .ToPlainString() - вывод текстового представления ВСЕГДА ПРИ ВЫВОДЕ В ЛОГИ И ОТОБРАЖЕНИИ ПОЛЬЗОВАТЕЛЮ
+        // .ToPlainString() - вывод текстового представления ВСЕГДА ПРИ ВЫВОДЕ В ЛОГИ И 
+        // ОТОБРАЖЕНИИ ПОЛЬЗОВАТЕЛЮ
         var penPriceBd = new BigDecimal("105.50");
         var bookPriceBd = new BigDecimal("235.23");
         var totalPriceBd = penPriceBd.add(bookPriceBd);
@@ -52,9 +53,9 @@ public class VariablesTheme {
         System.out.println("Сумма скидки: " + discountBd.toPlainString() + " руб.");
         System.out.println("Стоимость товаров со скидкой: " + finalPriceBd.toPlainString() + " руб.");
 
-        System.out.println("3. Перестановка значений ячеек в таблице");
+        System.out.println("\n3. Перестановка значений ячеек в таблице");
 
-        System.out.println("4. Декодирование сообщения");
+        System.out.println("\n4. Декодирование сообщения");
         int firstCharCode = 1055;
         int secondCharCode = 1088;
         int thirdCharCode = 1080;
@@ -75,5 +76,23 @@ public class VariablesTheme {
                 (char) firstCharCode, (char) secondCharCode, 
                 (char) thirdCharCode, (char) fourthCharCode, 
                 (char) fifthCharCode, (char) sixthCharCode);
-    };
+
+        System.out.println("\n\n5. Анализ кода товара");
+        var productCode = 734;
+        var productCategory = productCode / 100;
+        int productSubcategory = productCode / 10 % 10;
+        int packagingType = productCode % 10;
+        int controlSum = productCategory + productSubcategory + packagingType;
+        int virificationCode = productCategory * productSubcategory * packagingType;
+        System.out.printf("""
+                Код товара: %d
+                  категория товара - %d
+                  подкатегория - %d
+                  тип упаковки - %d
+                Контрольная сумма = %d
+                Проверочный код = %d
+                """,
+                productCode, productCategory, productSubcategory,
+                packagingType, controlSum, virificationCode);
+    }
 }
