@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 public class VariablesTheme {
     public static void main(String[] args) {
         final LocalTime verificationStartTime = LocalTime.now();
-        final var start = BigDecimal.valueOf(System.nanoTime());
+        final var startTime = BigDecimal.valueOf(System.nanoTime());
 
         System.out.println("1. ВЫВОД ASCII-ГРАФИКИ");
         System.out.println("Вывод в консоль слова JAVA c помощью конкатенации:\n");
@@ -37,6 +37,7 @@ public class VariablesTheme {
         System.out.println("Стоимость товаров со скидкой: %f руб.".formatted(finalPrice));
         System.out.println("\nВторой способ:");
         
+        // методы BigDecimal:
         // .add(b) - сумма
         // .subtract(b) - вычитание
         // .abs() -модуль
@@ -76,7 +77,7 @@ public class VariablesTheme {
         System.out.printf("\nРезультат: A1 = %d, B1 = %d", firstCell, secondCell);
         System.out.println("\n\nМетод: побитовая операция ^");
         System.out.printf("Исходные данные: A1 = %d, B1 = %d", firstCell, secondCell);
-        firstCell = firstCell ^ secondCell;
+        firstCell ^= secondCell;
         secondCell = firstCell ^ secondCell;
         firstCell ^= secondCell;
         System.out.printf("\nРезультат: A1 = %d, B1 = %d", firstCell, secondCell);
@@ -88,24 +89,18 @@ public class VariablesTheme {
         int fourthCharCode = 1074;
         int fifthCharCode = 1077;
         int sixthCharCode = 1090;
-        char firstChar = (char) firstCharCode;
-        char secondChar = (char) secondCharCode;
-        char thirdChar = (char) thirdCharCode;
-        char fourthChar = (char) fourthCharCode;
-        char fifthChar = (char) fifthCharCode;
-        char sixthChar = (char) sixthCharCode;
-        System.out.printf("%6d%6d%6d%6d%6d%6d\n", 
+        System.out.printf("%4d%6d%6d%6d%6d%6d\n", 
                 firstCharCode, secondCharCode, 
                 thirdCharCode, fourthCharCode, 
                 fifthCharCode, sixthCharCode);
-        System.out.printf("%6s%6s%6s%6s%6s%6s", 
+        System.out.printf("%4s%6s%6s%6s%6s%6s", 
                 (char) firstCharCode, (char) secondCharCode, 
                 (char) thirdCharCode, (char) fourthCharCode, 
                 (char) fifthCharCode, (char) sixthCharCode);
 
         System.out.println("\n\n5. Анализ кода товара");
-        var productCode = 734;
-        var productCategory = productCode / 100;
+        int productCode = 734;
+        int productCategory = productCode / 100;
         int productSubcategory = productCode / 10 % 10;
         int packagingType = productCode % 10;
         int controlSum = productCategory + productSubcategory + packagingType;
@@ -215,9 +210,11 @@ public class VariablesTheme {
 
         System.out.println("\n8. Замер времени работы кода");
         LocalTime verificationEndTime = LocalTime.now();
-        var finish = BigDecimal.valueOf(System.nanoTime());
+        var finishTime = BigDecimal.valueOf(System.nanoTime());
         var nanosecondsPerSecond = BigDecimal.valueOf(1_000_000_000);
-        var timeElapsed = finish.subtract(start).divide(nanosecondsPerSecond, 3, RoundingMode.HALF_UP);
+        var elapsedTimeInNanoseconds = finishTime.subtract(startTime);
+        var elapsedTimeInSeconds = elapsedTimeInNanoseconds.divide(nanosecondsPerSecond, 3, 
+                RoundingMode.HALF_UP);
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss:SSS");
         System.out.printf("""
                 Старт проверки: %s
@@ -226,6 +223,6 @@ public class VariablesTheme {
                 """,
                 dtf.format(verificationStartTime),
                 dtf.format(verificationEndTime),
-                timeElapsed);
+                elapsedTimeInSeconds);
     }
 }
