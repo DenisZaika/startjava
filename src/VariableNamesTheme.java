@@ -91,7 +91,7 @@ public class VariableNamesTheme {
         System.out.println("Имя работника месяца = " + monthEmployeeName);
 
         // Название электронной книги
-        String ebookName = "Маленький принц";
+        String ebookTitle = "Маленький принц";
         System.out.println("Название электронной книги = " + ebookName);
 
         // Размер
@@ -117,7 +117,7 @@ public class VariableNamesTheme {
         System.out.println("\n2. Boolean-переменные");
 
         // Сотни равны?
-        boolean isEqual = true;
+        boolean isEqualHundreds = true;
         System.out.println("Сотни равны? = " + isEqual);
 
         // Компьютер включен?
@@ -179,7 +179,7 @@ public class VariableNamesTheme {
         System.out.println("Новый идентификатор клиента = " + newClientId);
 
         // Количество символов в american standard code for information interchange
-        int asciiCharactersCount = 128;
+        int asciiCharsCount = 128;
         System.out.println("Количество символов в american standard code for information interchange = " + 
                 asciiCharactersCount);
     }
