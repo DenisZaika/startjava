@@ -33,8 +33,8 @@ public class VariablesTheme {
         float discount = totalPrice * 0.11f;
         float finalPrice = totalPrice - discount;
         System.out.printf("Стоимость товаров без скидки: %f руб.", totalPrice);
-        System.out.printf("\nСумма скидки: %f руб.", discount);
-        System.out.printf("\nСтоимость товаров со скидкой: %f руб.", finalPrice);
+        System.out.printf("%nСумма скидки: %f руб.", discount);
+        System.out.printf("%nСтоимость товаров со скидкой: %f руб.", finalPrice);
         System.out.println("\n\nВторой способ:");
         var penPriceBd = new BigDecimal("105.50");
         var bookPriceBd = new BigDecimal("235.23");
@@ -49,7 +49,7 @@ public class VariablesTheme {
         System.out.println("\n3. Перестановка значений ячеек в таблице");
         int firstCell = 2;
         int secondCell = 5;
-        System.out.printf("\nИсходные данные: A1 = %d, B1 = %d", firstCell, secondCell);
+        System.out.printf("%nИсходные данные: A1 = %d, B1 = %d", firstCell, secondCell);
         System.out.println("\nМетод: третья переменная");
         int temp = firstCell;
         firstCell = secondCell;
@@ -73,10 +73,10 @@ public class VariablesTheme {
         int charCode4 = 1074;
         int charCode5 = 1077;
         int charCode6 = 1090;
-        System.out.printf("\n%4d%6d%6d%6d%6d%6d\n", charCode1, charCode2, charCode3, charCode4, charCode5, 
-                charCode6);
-        System.out.printf("%4c%6c%6c%6c%6c%6c", charCode1, charCode2, charCode3, charCode4, charCode5, 
-                charCode6);
+        System.out.printf("%n%4d%6d%6d%6d%6d%6d%n",
+                charCode1, charCode2, charCode3, charCode4, charCode5, charCode6);
+        System.out.printf("%4c%6c%6c%6c%6c%6c", 
+                charCode1, charCode2, charCode3, charCode4, charCode5, charCode6);
 
         System.out.println("\n\n5. Анализ кода товара\n");
         int productCode = 734;
@@ -92,8 +92,9 @@ public class VariablesTheme {
                   тип упаковки - %d
                 Контрольная сумма = %d
                 Проверочный код = %d
-                """, productCode, productCategory, productSubcategory, packagingType, controlSum,
-                virificationCode);
+                """,
+                productCode, productCategory, productSubcategory, 
+                packagingType, controlSum, virificationCode);
 
         System.out.println("\n6. Тестирование датчиков перед запуском ракеты\n");
         byte temperature = Byte.MAX_VALUE;
@@ -102,35 +103,40 @@ public class VariablesTheme {
                   Исходное: %d
                   +1: %d
                   -1: %d
-                \n""", temperature, ++temperature, --temperature);
+                %n""", 
+                temperature, ++temperature, --temperature);
         short pressure = Short.MAX_VALUE;
         System.out.printf("""
                 [Давление, Па]:
                   Исходное: %d
                   +1: %d
                   -1: %d
-                \n""", pressure, ++pressure, --pressure);
+                %n""", 
+                pressure, ++pressure, --pressure);
         char systemStatusCode = Character.MAX_VALUE;
         System.out.printf("""
                 [Код состояния системы]:
                   Исходное: %d
                   +1: %d
                   -1: %d
-                \n""", (int) systemStatusCode, (int) ++systemStatusCode, (int) --systemStatusCode);
+                %n""", 
+                (int) systemStatusCode, (int) ++systemStatusCode, (int) --systemStatusCode);
         int traveledDistance = Integer.MAX_VALUE;
         System.out.printf("""
                 [Пройденное расстояние, м]:
                   Исходное: %d
                   +1: %d
                   -1: %d
-                \n""", traveledDistance, ++traveledDistance, --traveledDistance);
+                %n""", 
+                traveledDistance, ++traveledDistance, --traveledDistance);
         long flightDuration = Long.MAX_VALUE;
         System.out.printf("""
                 [Время c момента старта, с]:
                   Исходное: %d
                   +1: %d
                   -1: %d
-                """, flightDuration, ++flightDuration, --flightDuration);
+                """, 
+                flightDuration, ++flightDuration, --flightDuration);
 
         System.out.println("\n7. Вывод параметров JVM и ОС");
         Runtime rt = Runtime.getRuntime();
@@ -140,29 +146,31 @@ public class VariablesTheme {
         double usedMemory = totalMemory - freeMemory;
         double maxMemory = rt.maxMemory() / (1024.0 * 1024.0);
         System.out.printf("""
-                \nХарактеристики JVM:
+                %nХарактеристики JVM:
                   Доступное число ядер - %d
                   Выделенная память - %.1f МБ
                   Свободная память - %.1f МБ
                   Используемая память - %.1f МБ
                   Максимально доступная для выделения память - %.1f МБ
-                """, availableCpus, totalMemory, freeMemory, usedMemory, maxMemory);
+                """, 
+                availableCpus, totalMemory, freeMemory, usedMemory, maxMemory);
         String systemDisk = System.getProperty("user.dir");
         String osVersion = System.getProperty("os.version");
         String javaVersion = System.getProperty("java.version");
         String fileSeparator = System.getProperty("file.separator");
         System.out.printf("""
-                \nПараметры ОС:
+                %nПараметры ОС:
                   Системный диск: %s
                   Версия ОС: %s
                   Версия java: %s
                   Символ разделения пути: %s
-                """, systemDisk.charAt(0), osVersion, javaVersion, fileSeparator);
+                """, 
+                systemDisk.charAt(0), osVersion, javaVersion, fileSeparator);
 
         System.out.println("\n8. Замер времени работы кода\n");
         LocalTime verificationEndTime = LocalTime.now();
         long finishTime = System.nanoTime();
-        long nsPerSecond = 1_000_000_000;
+        double nsPerSecond = 1e9;
         long elapsedTimeInNs = finishTime - startTime;
         double elapsedTimeInSeconds = (double) elapsedTimeInNs / nsPerSecond;
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss:SSS");
@@ -170,7 +178,7 @@ public class VariablesTheme {
                 Старт проверки: %s
                 Финиш проверки: %s
                 Время работы:   %.3f сек
-                """, dtf.format(verificationStartTime), dtf.format(verificationEndTime), 
-                elapsedTimeInSeconds);
+                """, 
+                dtf.format(verificationStartTime), dtf.format(verificationEndTime), elapsedTimeInSeconds);
     }
 }
