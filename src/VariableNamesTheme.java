@@ -92,7 +92,7 @@ public class VariableNamesTheme {
 
         // Название электронной книги
         String ebookTitle = "Маленький принц";
-        System.out.println("Название электронной книги = " + ebookName);
+        System.out.println("Название электронной книги = " + ebookTitle);
 
         // Размер
         int size = 17;
@@ -118,7 +118,7 @@ public class VariableNamesTheme {
 
         // Сотни равны?
         boolean isEqualHundreds = true;
-        System.out.println("Сотни равны? = " + isEqual);
+        System.out.println("Сотни равны? = " + isEqualHundreds);
 
         // Компьютер включен?
         boolean isComputerOn = false;
@@ -181,6 +181,6 @@ public class VariableNamesTheme {
         // Количество символов в american standard code for information interchange
         int asciiCharsCount = 128;
         System.out.println("Количество символов в american standard code for information interchange = " + 
-                asciiCharactersCount);
+                asciiCharsCount);
     }
 }
