@@ -56,28 +56,29 @@ public class IfElseStatementTheme {
         }
 
         System.out.println("\n4. Определение первого символа никнейма\n");
-        String name = "#Denis";
-        char firstNameChar = name.charAt(0);
-        String messageStart = "Имя \"%s\" начинается с ";
         System.out.println("Первый способ: диапазон кодов");
-        if ((firstNameChar <= 'z') && (firstNameChar >= 'a')) {
-            System.out.printf(messageStart + "маленькой буквы \"%c\"", name, firstNameChar);
-        } else if ((firstNameChar <= 'Z') && (firstNameChar >= 'A')) {
-            System.out.printf(messageStart + "большой буквы \"%c\"", name, firstNameChar);
-        } else if ((firstNameChar <= '9') && (firstNameChar >= '0')) {
-            System.out.printf(messageStart + "цифры \"%c\"", name, firstNameChar);
+        String name = "Denis";
+        System.out.printf("Имя \"%s\" начинается с ", name);
+        char firstNameChar = name.charAt(0);
+        if ((firstNameChar >= 'a') && (firstNameChar <= 'z')) {
+            System.out.printf("маленькой буквы \"%c\"", firstNameChar);
+        } else if ((firstNameChar >= 'A') && (firstNameChar <= 'Z')) {
+            System.out.printf("большой буквы \"%c\"", firstNameChar);
+        } else if ((firstNameChar >= '0') && (firstNameChar <= '9')) {
+            System.out.printf("цифры \"%c\"", firstNameChar);
         } else {
-            System.out.printf(messageStart + "символа \"%c\"", name, firstNameChar);
+            System.out.printf("символа \"%c\"", firstNameChar);
         }
         System.out.println("\n\nВторой способ: методы класса Character");
+        System.out.printf("Имя \"%s\" начинается с ", name);
         if (Character.isLowerCase(firstNameChar)) {
-            System.out.printf(messageStart + "маленькой буквы \"%c\"", name, firstNameChar);
+            System.out.printf("маленькой буквы \"%c\"", firstNameChar);
         } else if (Character.isUpperCase(firstNameChar)) {
-            System.out.printf(messageStart + "большой буквы \"%c\"", name, firstNameChar);
+            System.out.printf("большой буквы \"%c\"", firstNameChar);
         } else if (Character.isDigit(firstNameChar)) {
-            System.out.printf(messageStart + "цифры \"%c\"", name, firstNameChar);
+            System.out.printf("цифры \"%c\"", firstNameChar);
         } else {
-            System.out.printf(messageStart + "символа \"%c\"", name, firstNameChar);
+            System.out.printf("символа \"%c\"", firstNameChar);
         }
 
         System.out.println("\n\n5. Инвентаризация\n");
