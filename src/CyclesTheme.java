@@ -5,30 +5,24 @@ public class CyclesTheme {
         System.out.println("1. Вывод ASCII-символов\n");
         System.out.printf("%-10s%-12s%s%n", "DECIMAL", "CHARACTER", "DESCRIPTION");
         for (int i = 33; i <= 47; i += 2) {
-            System.out.printf("%4d%11c            %-20s%n", i, (char) i, Character.getName((char) i));
+            System.out.printf("%4d%11c%12c%s%n", i, i, ' ', Character.getName(i));
         }
         for (int i = 98; i <= 122; i += 2) {
-            System.out.printf("%4d%11c            %-20s%n", i, (char) i, Character.getName((char) i));
+            System.out.printf("%4d%11c%12c%s%n", i, i, ' ', Character.getName(i));
         }
 
         System.out.println("\n2. Вывод геометрических фигур\n");
-        char dashSymbol = '-';
-        char asteriskSymbol = '*';
-        char caretSymbol = '^';
-        int dashSymbolCount = 10;
         int asteriskSymbolCount = 5;
         int caretSymbolCount = 1;
         for (int i = 1; i <= 5; i++) {
-            for (int j = 1; j <= dashSymbolCount; j++) {
-                System.out.print(dashSymbol);
-            }
+            System.out.print("----------");
             System.out.print(" ");
             for (int j = 1; j <= asteriskSymbolCount; j++) {
-                System.out.print(asteriskSymbol);
+                System.out.print('*');
             }
             System.out.print(" ");
             for (int j = 1; j <= caretSymbolCount; j++) {
-                System.out.print(caretSymbol);
+                System.out.print('^');
             }
             System.out.println();
             asteriskSymbolCount -= 1;
@@ -36,15 +30,10 @@ public class CyclesTheme {
         }
 
         System.out.println("\n3. Вывод таблицы умножения\n");
-        System.out.print("  |");
-        for (int j = 2; j <= 9; j++) {
-            System.out.printf("%3d", j);
-        }
-        System.out.print("\n--+");
-        for (int j = 1; j <= 24; j++) {
-            System.out.print("-");
-        }
-        System.out.println();
+        System.out.print("""
+                  |  2  3  4  5  6  7  8  9
+                --+------------------------
+                """);
         for (int i = 2; i <= 9; i++) {
             System.out.printf("%d |", i);
             for (int j = 2; j <= 9; j++) {
@@ -54,32 +43,38 @@ public class CyclesTheme {
         }
 
         System.out.println("\n4. Вывод чисел в несколько строк\n");
-        int initialNumber = 1;
         int rangeLimit = 24;
+        int numbersAmount = 1;
         for (int i = 1; i < rangeLimit; i += 2) {
-            if (initialNumber % 6 == 0) {
-                System.out.println();
-                initialNumber = 1;
-            }
             System.out.printf("%3d", i);
-            if (initialNumber < 5 && i + 2 > rangeLimit) {
-                for (int j = 1; j <= 5 - initialNumber % 6; j++) {
-                    System.out.printf("  0");
+            if (numbersAmount % 5 == 0 || i + 2 >= rangeLimit) {
+                while (numbersAmount % 5 != 0) {
+                    System.out.printf("%3d", 0);
+                    numbersAmount++;
                 }
+                System.out.println();
             }
-            initialNumber += 1;
+            numbersAmount++;
         }
 
-        System.out.println("\n\n5. Вывод чисел между min и max");
+        System.out.println("\n5. Вывод чисел между min и max");
         int firstNumber = 10;
         int secondNumber = 5;
         int thirdNumber = -1;
-        int maxNumber = (firstNumber > secondNumber)
-                ? (firstNumber > thirdNumber ? firstNumber : thirdNumber)
-                : (secondNumber > thirdNumber ? secondNumber : thirdNumber);
-        int minNumber = (firstNumber < secondNumber)
-                ? (firstNumber < thirdNumber ? firstNumber : thirdNumber)
-                : (secondNumber < thirdNumber ? secondNumber : thirdNumber);
+        int maxNumber = firstNumber;
+        int minNumber = firstNumber;
+        if (firstNumber > secondNumber) {
+            maxNumber = firstNumber;
+            minNumber = secondNumber;
+        } else {
+            maxNumber = secondNumber;
+            minNumber = firstNumber;
+        }
+        if (thirdNumber > maxNumber) {
+            maxNumber = thirdNumber;
+        } else if (thirdNumber < minNumber) {
+            minNumber = thirdNumber;
+        }
         System.out.printf("""
                 %nДано 3 числа: %d, %d, %d
                 Минимальное число:  %d
