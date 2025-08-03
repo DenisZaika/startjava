@@ -15,8 +15,7 @@ public class CyclesTheme {
         int asteriskSymbolCount = 5;
         int caretSymbolCount = 1;
         for (int i = 1; i <= 5; i++) {
-            System.out.print("----------");
-            System.out.print(" ");
+            System.out.print("---------- ");
             for (int j = 1; j <= asteriskSymbolCount; j++) {
                 System.out.print('*');
             }
@@ -44,60 +43,54 @@ public class CyclesTheme {
 
         System.out.println("\n4. Вывод чисел в несколько строк\n");
         int rangeLimit = 24;
-        int numbersAmount = 1;
-        for (int i = 1; i < rangeLimit; i += 2) {
-            System.out.printf("%3d", i);
-            if (numbersAmount % 5 == 0 || i + 2 >= rangeLimit) {
-                while (numbersAmount % 5 != 0) {
-                    System.out.printf("%3d", 0);
-                    numbersAmount++;
-                }
+        int itemsPerRow = 1;
+        for (int i = 1, j = itemsPerRow; i < rangeLimit || j != 1; i += 2, j++) {
+            System.out.printf("%3d", i < rangeLimit ? i : 0);
+            if (j == 5) {
                 System.out.println();
+                j = 0;
             }
-            numbersAmount++;
         }
 
         System.out.println("\n5. Вывод чисел между min и max");
         int firstNumber = 10;
         int secondNumber = 5;
         int thirdNumber = -1;
-        int maxNumber = firstNumber;
-        int minNumber = firstNumber;
+        int max = firstNumber;
+        int min = firstNumber;
         if (firstNumber > secondNumber) {
-            maxNumber = firstNumber;
-            minNumber = secondNumber;
+            min = secondNumber;
         } else {
-            maxNumber = secondNumber;
-            minNumber = firstNumber;
+            max = secondNumber;
         }
-        if (thirdNumber > maxNumber) {
-            maxNumber = thirdNumber;
-        } else if (thirdNumber < minNumber) {
-            minNumber = thirdNumber;
+        if (thirdNumber > max) {
+            max = thirdNumber;
+        } else if (thirdNumber < min) {
+            min = thirdNumber;
         }
         System.out.printf("""
                 %nДано 3 числа: %d, %d, %d
                 Минимальное число:  %d
                 Максимальное число: %d
                 """,
-                firstNumber, secondNumber, thirdNumber, minNumber, maxNumber);
-        System.out.printf("Числа в интервале (%d, %d): ", minNumber, maxNumber);
-        for (int i = maxNumber - 1; i > minNumber; i--) {
+                firstNumber, secondNumber, thirdNumber, min, max);
+        System.out.printf("Числа в интервале (%d, %d): ", min, max);
+        for (int i = max - 1; i > min; i--) {
             System.out.printf("%d ", i);
         }
 
         System.out.println("\n\n6. Разные операции над числом");
         int originalNumber = 2234321;
         int reversedNumber = 0;
-        int temp = originalNumber;
+        int currNumber = originalNumber;
         int twosCount = 0;
-        while (temp > 0) {
-            int digit = temp % 10;
+        while (currNumber > 0) {
+            int digit = currNumber % 10;
             if (digit == 2) {
-                twosCount += 1;
+                twosCount++;
             }
             reversedNumber = reversedNumber * 10 + digit;
-            temp /= 10;
+            currNumber /= 10;
         }
         String palindromeStatus = (originalNumber == reversedNumber) ? "палиндром" : "не палиндром";
         String evenStatus = (twosCount % 2 == 0) ? "с четным" : "с нечетным";
@@ -109,98 +102,59 @@ public class CyclesTheme {
         int firstPart = originalNumber / 1000;
         int secondPart = originalNumber % 1000;
         int firstPartSum = 0;
-        temp = firstPart;
-        while (temp > 0) {
-            firstPartSum += temp % 10;
-            temp /= 10;
-        }
-        temp = secondPart;
         int secondPartSum = 0;
-        while (temp > 0) {
-            secondPartSum += temp % 10;
-            temp /= 10;
+        for (int i = firstPart, j = secondPart; i > 0 || j > 0; i /= 10, j /= 10) {
+            firstPartSum += i % 10;
+            secondPartSum += j % 10;
         }
         String numberStatus = (firstPartSum == secondPartSum) ? "счастливое" : "несчастливое";
         System.out.printf("""
                 %n%d - %s число
                 Сумма цифр %03d: = %d
                 Сумма цифр %d: = %d%n""",
-                originalNumber, numberStatus, secondPart, secondPartSum, firstPart, firstPartSum);
+                originalNumber, numberStatus,
+                secondPart, secondPartSum,
+                firstPart, firstPartSum);
 
         System.out.println("\n8. Генератор пароля\n");
         Random random = new Random();
+        boolean hasDigit = false;
+        boolean hasCapitalLetter = false;
+        boolean hasLowerCaseLetter = false;
+        boolean hasSpecialSymbol = false;
         String password = "";
         for (int i = 1; i <= 8; i++) {
-            int symbolCategory = random.nextInt(1, 5);
-            char randomSymbol;
-            switch (symbolCategory) {
-                // Цифры
-                case 1:
-                    randomSymbol = (char) random.nextInt(48, 58);
-                    break;
-
-                // Заглавные
-                case 2:
-                    randomSymbol = (char) random.nextInt(65, 91);
-                    break;
-
-                // Строчные
-                case 3:
-                    randomSymbol = (char) random.nextInt(97, 123);
-                    break;
-
-                // Спец. символы
-                case 4:
-                    int symbolSubcategory = random.nextInt(1, 5);
-                    switch (symbolSubcategory) {
-                        case 1:
-                            randomSymbol = (char) random.nextInt(33, 48);
-                            break;
-                        case 2:
-                            randomSymbol = (char) random.nextInt(58, 65);
-                            break;
-                        case 3:
-                            randomSymbol = (char) random.nextInt(91, 97);
-                            break;
-                        case 4:
-                            randomSymbol = (char) random.nextInt(123, 127);
-                            break;
-                        default:
-                            randomSymbol = '?';
-                            break;
-                    }
-                    break;
-                default:
-                    randomSymbol = '?';
-                    break;
+            int symbolCategory = random.nextInt(4);
+            char randomSymbol = '?';
+            if (symbolCategory == 0) {
+                randomSymbol = (char) random.nextInt(48, 58);
+                hasDigit = true;
+            } else if (symbolCategory == 1) {
+                randomSymbol = (char) random.nextInt(65, 91);
+                hasCapitalLetter = true;
+            } else if (symbolCategory == 2) {
+                randomSymbol = (char) random.nextInt(97, 123);
+                hasLowerCaseLetter = true;
+            } else if (symbolCategory == 3) {
+                int symbolSubcategory = random.nextInt(4);
+                if (symbolSubcategory == 0) {
+                    randomSymbol = (char) random.nextInt(33, 48);
+                } else if (symbolSubcategory == 1) {
+                    randomSymbol = (char) random.nextInt(58, 65);
+                } else if (symbolSubcategory == 2) {
+                    randomSymbol = (char) random.nextInt(91, 97);
+                } else if (symbolSubcategory == 3) {
+                    randomSymbol = (char) random.nextInt(123, 127);
+                }
+                hasSpecialSymbol = true;
             }
             password += randomSymbol;
         }
-        boolean hasCapitalLetter = false;
-        boolean hasLowerCaseLetter = false;
-        boolean hasDigit = false;
-        boolean hasSpecialSymbol = false;
-        for (int i = 0; i < 8; i++) {
-            if (!hasCapitalLetter && Character.isUpperCase(password.charAt(i))) {
-                hasCapitalLetter = true;
-            }
-            if (!hasLowerCaseLetter && Character.isLowerCase(password.charAt(i))) {
-                hasLowerCaseLetter = true;
-            }
-            if (!hasDigit && Character.isDigit(password.charAt(i))) {
-                hasDigit = true;
-            }
-            if (!hasSpecialSymbol && !Character.isLetterOrDigit(password.charAt(i))) {
-                hasSpecialSymbol = true;
-            }
-        }
-        String reliabilityStatus = "";
+        String reliabilityStatus = "Слабый";
         if (password.length() >= 8 && hasCapitalLetter && hasLowerCaseLetter && hasSpecialSymbol) {
             reliabilityStatus = "Надежный";
         } else if (password.length() >= 8 && (hasCapitalLetter || hasDigit)) {
             reliabilityStatus = "Средний";
-        } else {
-            reliabilityStatus = "Слабый";
         }
         System.out.printf("""
                 Пароль: %s
