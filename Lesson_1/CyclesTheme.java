@@ -118,35 +118,27 @@ public class CyclesTheme {
 
         System.out.println("\n8. Генератор пароля\n");
         Random random = new Random();
+        boolean hasSpecialSymbol = false;
         boolean hasDigit = false;
         boolean hasCapitalLetter = false;
         boolean hasLowerCaseLetter = false;
-        boolean hasSpecialSymbol = false;
         String password = "";
         for (int i = 1; i <= 8; i++) {
-            int symbolCategory = random.nextInt(4);
-            char randomSymbol = '?';
-            if (symbolCategory == 0) {
-                randomSymbol = (char) random.nextInt(48, 58);
-                hasDigit = true;
-            } else if (symbolCategory == 1) {
-                randomSymbol = (char) random.nextInt(65, 91);
-                hasCapitalLetter = true;
-            } else if (symbolCategory == 2) {
-                randomSymbol = (char) random.nextInt(97, 123);
-                hasLowerCaseLetter = true;
-            } else if (symbolCategory == 3) {
-                int symbolSubcategory = random.nextInt(4);
-                if (symbolSubcategory == 0) {
-                    randomSymbol = (char) random.nextInt(33, 48);
-                } else if (symbolSubcategory == 1) {
-                    randomSymbol = (char) random.nextInt(58, 65);
-                } else if (symbolSubcategory == 2) {
-                    randomSymbol = (char) random.nextInt(91, 97);
-                } else if (symbolSubcategory == 3) {
-                    randomSymbol = (char) random.nextInt(123, 127);
-                }
+            char randomSymbol = (char) random.nextInt(33, 127);
+            if (randomSymbol >= 33 && randomSymbol < 48 ||
+                    randomSymbol >= 58 && randomSymbol < 65 ||
+                    randomSymbol >= 91 && randomSymbol < 97 ||
+                    randomSymbol >= 123 && randomSymbol < 127) {
                 hasSpecialSymbol = true;
+            }
+            if ((randomSymbol >= 48) && (randomSymbol < 58)) {
+                hasDigit = true;
+            }
+            if ((randomSymbol >= 65) && (randomSymbol < 91)) {
+                hasCapitalLetter = true;
+            }
+            if ((randomSymbol >= 97) && (randomSymbol < 123)) {
+                hasLowerCaseLetter = true;
             }
             password += randomSymbol;
         }
