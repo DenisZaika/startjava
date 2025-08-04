@@ -1,20 +1,20 @@
 public class Calculator {
     public static void main(String[] args) {
-        int firstOperand = 12;
-        int secondOperand = 5;
-        char operation = '%';
+        int firstOperand = 2;
+        int secondOperand = 6;
+        char operation = '-';
         int result = 1;
-        if (operation == 37) {
+        if (operation == '%') {
             result = firstOperand % secondOperand;
-        } else if (operation == 42) {
+        } else if (operation == '*') {
             result = firstOperand * secondOperand;
-        } else if (operation == 43) {
+        } else if (operation == '+') {
             result = firstOperand + secondOperand;
-        } else if (operation == 45) {
+        } else if (operation == '-') {
             result = firstOperand - secondOperand;
-        } else if (operation == 47) {
+        } else if (operation == '/') {
             result = firstOperand / secondOperand;
-        } else if (operation == 94) {
+        } else if (operation == '^') {
             for (int i = 1; i <= secondOperand; i++) {
                 result *= firstOperand;
             }
