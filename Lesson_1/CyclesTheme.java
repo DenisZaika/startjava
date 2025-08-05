@@ -126,29 +126,23 @@ public class CyclesTheme {
 
         System.out.println("\n8. Генератор пароля\n");
         Random random = new Random();
-        boolean hasSpecialSymbol = false;
-        boolean hasDigit = false;
+        String password = "";
         boolean hasCapitalLetter = false;
         boolean hasLowerCaseLetter = false;
-        String password = "";
-        for (int i = 1; i <= 8; i++) {
+        boolean hasDigit = false;
+        boolean hasSpecialSymbol = false;
+        for (int i = 0; i < 8; i++) {
             char randomSymbol = (char) random.nextInt(33, 127);
-            if (randomSymbol >= 33 && randomSymbol < 48 ||
-                    randomSymbol >= 58 && randomSymbol < 65 ||
-                    randomSymbol >= 91 && randomSymbol < 97 ||
-                    randomSymbol >= 123 && randomSymbol < 127) {
+            password += randomSymbol;
+            if (Character.isUpperCase(randomSymbol)) {
+                hasCapitalLetter = true;
+            } else if (Character.isLowerCase(randomSymbol)) {
+                hasLowerCaseLetter = true;
+            } else if (Character.isDigit(randomSymbol)) {
+                hasDigit = true;
+            } else {
                 hasSpecialSymbol = true;
             }
-            if ((randomSymbol >= 48) && (randomSymbol < 58)) {
-                hasDigit = true;
-            }
-            if ((randomSymbol >= 65) && (randomSymbol < 91)) {
-                hasCapitalLetter = true;
-            }
-            if ((randomSymbol >= 97) && (randomSymbol < 123)) {
-                hasLowerCaseLetter = true;
-            }
-            password += randomSymbol;
         }
         String reliabilityStatus = "Слабый";
         if (password.length() >= 8 && hasCapitalLetter && hasLowerCaseLetter && hasSpecialSymbol) {
