@@ -101,11 +101,19 @@ public class CyclesTheme {
         originalNumber = 101002;
         int firstPart = originalNumber / 1000;
         int secondPart = originalNumber % 1000;
+        int firstCurrNumber = firstPart;
+        int secondCurrNumber = secondPart;
         int firstPartSum = 0;
         int secondPartSum = 0;
-        for (int i = firstPart, j = secondPart; i > 0 || j > 0; i /= 10, j /= 10) {
-            firstPartSum += i % 10;
-            secondPartSum += j % 10;
+        while (firstCurrNumber > 0 || secondCurrNumber > 0) {
+            if (firstCurrNumber > 0) {
+                firstPartSum += firstCurrNumber % 10;
+                firstCurrNumber = firstCurrNumber / 10;
+            }
+            if (secondCurrNumber > 0) {
+                secondPartSum += secondCurrNumber % 10;
+                secondCurrNumber = secondCurrNumber / 10;
+            }
         }
         String numberStatus = (firstPartSum == secondPartSum) ? "счастливое" : "несчастливое";
         System.out.printf("""
