@@ -48,8 +48,8 @@ public class RpsGameFormatting {
         }
         System.out.println(secondPlayerSign);
         if (firstPlayerSign.equals(secondPlayerSign)) {
-                System.out.println("Победила дружба!");
-                return;
+            System.out.println("Победила дружба!");
+            return;
         }
         boolean isFirstPlayerWinner = firstPlayerSign.equals(rock) && secondPlayerSign.equals(scissors) ||
                 firstPlayerSign.equals(scissors) && secondPlayerSign.equals(paper) ||
