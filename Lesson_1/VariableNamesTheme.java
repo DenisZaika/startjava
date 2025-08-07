@@ -7,36 +7,36 @@ public class VariableNamesTheme {
         System.out.println("Цифра = " + digit);
 
         // Сумма цифр
-        int digitSum = 1 + 2;
-        System.out.println("Сумма цифр = " + digitSum);
+        int numSum = 1 + 2;
+        System.out.println("Сумма цифр = " + numSum);
 
         // Произведение цифр
-        int digitMult = 1 * 2;
-        System.out.println("Произведение цифр = " + digitMult);
+        int digitProduct = 1 * 2;
+        System.out.println("Произведение цифр = " + digitProduct);
 
         // Максимальное число
-        int maxNumber = 10;
-        System.out.println("Максимальное число = " + maxNumber);
+        int max = 10;
+        System.out.println("Максимальное число = " + max);
 
         // Количество десятков
-        int tenCount = 4;
-        System.out.println("Количество десятков = " + tenCount);
+        int tensCount = 4;
+        System.out.println("Количество десятков = " + tensCount);
 
         // Вес собаки
         int dogWeight = 20;
         System.out.println("Вес собаки = " + dogWeight + " кг");
 
         // Исходное число
-        int originalNumber = 1;
-        System.out.println("Исходное число = " + originalNumber);
+        int originalNum = 1;
+        System.out.println("Исходное число = " + originalNum);
 
         // Процент по вкладу
-        int depositPercent = 3;
-        System.out.println("Процент по вкладу = " + depositPercent + " % ");
+        int interestRate = 3;
+        System.out.println("Процент по вкладу = " + interestRate + " % ");
 
         // Символ &
-        char symbol = '&';
-        System.out.println("Символ & = " + symbol);
+        char ampersand = '&';
+        System.out.println("Символ & = " + ampersand);
 
         // Код ошибки
         String errorCode = "404";
@@ -47,16 +47,16 @@ public class VariableNamesTheme {
         System.out.println("Тип сообщения = " + msgType);
 
         // Число нулей
-        int zeroNumber = 8;
-        System.out.println("Число нулей = " + zeroNumber);
+        int zerosNumber = 8;
+        System.out.println("Число нулей = " + zerosNumber);
 
         // Уникальное число
-        int uniqueNumber = 777;
-        System.out.println("Уникальное число = " + uniqueNumber);
+        int uniqueNum = 777;
+        System.out.println("Уникальное число = " + uniqueNum);
 
         // Случайное число
-        int randomNumber = 613;
-        System.out.println("Случайное число = " + randomNumber);
+        int randomNum = 613;
+        System.out.println("Случайное число = " + randomNum);
 
         // Математическое выражение
         String mathExpr = "1 + 3";
@@ -67,12 +67,12 @@ public class VariableNamesTheme {
         System.out.println("Счет в игре = " + gameScore);
 
         // Максимальная длина
-        int maxLength = 100;
-        System.out.println("Максимальная длина = " + maxLength);
+        int maxLen = 100;
+        System.out.println("Максимальная длина = " + maxLen);
 
         // Пункт меню
-        String menuPoint = "1.2";
-        System.out.println("Пункт меню = " + menuPoint);
+        String menuItem = "1.2";
+        System.out.println("Пункт меню = " + menuItem);
 
         // Стоимость кофе
         int coffeePrice = 1;
@@ -83,12 +83,12 @@ public class VariableNamesTheme {
         System.out.println("Начальная дата = " + startingData);
 
         // Окончание диапазона
-        int rangeLimit = 10;
-        System.out.println("Окончание диапазона = " + rangeLimit);
+        int rangeEnd = 10;
+        System.out.println("Окончание диапазона = " + rangeEnd);
 
         // Имя работника месяца
-        String monthEmployeeName = "Denis";
-        System.out.println("Имя работника месяца = " + monthEmployeeName);
+        String employeeOfMonthName = "Denis";
+        System.out.println("Имя работника месяца = " + employeeOfMonthName);
 
         // Название электронной книги
         String ebookTitle = "Маленький принц";
@@ -121,8 +121,8 @@ public class VariableNamesTheme {
         System.out.println("Сотни равны? = " + isEqualHundreds);
 
         // Компьютер включен?
-        boolean isComputerOn = false;
-        System.out.println("Компьютер включен? = " + isComputerOn);
+        boolean isPcOn = false;
+        System.out.println("Компьютер включен? = " + isPcOn);
 
         // Есть равные цифры?
         boolean hasEqualDigits = false;
@@ -175,8 +175,8 @@ public class VariableNamesTheme {
         System.out.println("Сокращенный uniform resource locator = " + shortUrl);
 
         // Новый идентификатор клиента
-        int newClientId = 100;
-        System.out.println("Новый идентификатор клиента = " + newClientId);
+        int newCid = 100;
+        System.out.println("Новый идентификатор клиента = " + newCid);
 
         // Количество символов в american standard code for information interchange
         int asciiCharsCount = 128;
