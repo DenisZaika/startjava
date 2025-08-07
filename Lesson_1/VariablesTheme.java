@@ -103,40 +103,39 @@ public class VariablesTheme {
                   Исходное: %d
                   +1: %d
                   -1: %d
-                %n""", 
-                temperature, ++temperature, --temperature);
+                %n""", temperature, ++temperature, --temperature);
+        
         short pressure = Short.MAX_VALUE;
         System.out.printf("""
                 [Давление, Па]:
                   Исходное: %d
                   +1: %d
                   -1: %d
-                %n""", 
-                pressure, ++pressure, --pressure);
+                %n""", pressure, ++pressure, --pressure);
+        
         char systemStatusCode = Character.MAX_VALUE;
         System.out.printf("""
                 [Код состояния системы]:
                   Исходное: %d
                   +1: %d
                   -1: %d
-                %n""", 
-                (int) systemStatusCode, (int) ++systemStatusCode, (int) --systemStatusCode);
+                %n""", (int) systemStatusCode, (int) ++systemStatusCode, (int) --systemStatusCode);
+        
         int traveledDistance = Integer.MAX_VALUE;
         System.out.printf("""
                 [Пройденное расстояние, м]:
                   Исходное: %d
                   +1: %d
                   -1: %d
-                %n""", 
-                traveledDistance, ++traveledDistance, --traveledDistance);
+                %n""", traveledDistance, ++traveledDistance, --traveledDistance);
+        
         long flightDuration = Long.MAX_VALUE;
         System.out.printf("""
                 [Время c момента старта, с]:
                   Исходное: %d
                   +1: %d
                   -1: %d
-                """, 
-                flightDuration, ++flightDuration, --flightDuration);
+                """, flightDuration, ++flightDuration, --flightDuration);
 
         System.out.println("\n7. Вывод параметров JVM и ОС");
         Runtime rt = Runtime.getRuntime();
@@ -154,31 +153,29 @@ public class VariablesTheme {
                   Максимально доступная для выделения память - %.1f МБ
                 """, 
                 availableCpus, totalMemory, freeMemory, usedMemory, maxMemory);
-        String systemDisk = System.getProperty("user.dir");
+        char systemDisk = System.getProperty("user.dir").charAt(0);
         String osVersion = System.getProperty("os.version");
         String javaVersion = System.getProperty("java.version");
         String fileSeparator = System.getProperty("file.separator");
         System.out.printf("""
                 %nПараметры ОС:
-                  Системный диск: %s
+                  Системный диск: %c
                   Версия ОС: %s
                   Версия java: %s
                   Символ разделения пути: %s
                 """, 
-                systemDisk.charAt(0), osVersion, javaVersion, fileSeparator);
+                systemDisk, osVersion, javaVersion, fileSeparator);
 
         System.out.println("\n8. Замер времени работы кода\n");
         LocalTime verificationEndTime = LocalTime.now();
         long finishTime = System.nanoTime();
-        double nsPerSecond = 1e9;
-        long elapsedTimeInNs = finishTime - startTime;
-        double elapsedTimeInSeconds = (double) elapsedTimeInNs / nsPerSecond;
+        double duration = (double) (finishTime - startTime) / 1e9;
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss:SSS");
         System.out.printf("""
                 Старт проверки: %s
                 Финиш проверки: %s
                 Время работы:   %.3f сек
                 """, 
-                dtf.format(verificationStartTime), dtf.format(verificationEndTime), elapsedTimeInSeconds);
+                dtf.format(verificationStartTime), dtf.format(verificationEndTime), duration);
     }
 }
