@@ -11,27 +11,19 @@ public class Calculator {
     public boolean setSign(char sign) {
         if (sign != '+' && sign != '-' && sign != '*' && sign != '/' && sign != '^' && sign != '%') {
             return false;
-        } else {
-            this.sign = sign;
-            return true;
         }
+        this.sign = sign;
+        return true;
     }
 
     public void setOperand2(int operand2) {
         this.operand2 = operand2;
     }
 
-    public boolean canCalculate() {
-        switch (sign) {
-            case '/':
-            case '%':
-                return operand2 != 0;
-            default:
-                return true;
-        }
-    }
-
     public double calculate() {
+        if (operand2 == 0 && (sign == '/' || sign == '%')) {
+            return Double.NaN;
+        }
         switch (sign) {
             case '+':
                 return operand1 + operand2;
@@ -42,7 +34,15 @@ public class Calculator {
             case '/':
                 return (double) operand1 / operand2;
             case '^':
-                return Math.pow(operand1, operand2);
+                int result = 1;
+                int temp = operand2;
+                if (operand2 < 0) {
+                    temp = -operand2;
+                }
+                for (int i = 1; i <= temp; i++) {
+                    result *= operand1;
+                }
+                return operand2 > 0 ? result : 1.0 / result;
             case '%':
                 return operand1 % operand2;
             default:
