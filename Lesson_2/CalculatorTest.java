@@ -14,37 +14,31 @@ public class CalculatorTest {
             calc.setOperand1(operand1);
             char sign;
 
-            while (true) {
+            do {
                 System.out.print("Введите знак операции (+, -, *, /, ^, %): ");
                 sign = scan.next().charAt(0);
-                if (calc.setSign(sign)) {
-                    break;
+                if (!calc.setSign(sign)) {
+                    System.out.printf("Ошибка: операция '%c' не поддерживается%n", sign);
                 }
-                System.out.printf("Ошибка: операция '%c' не поддерживается%n", sign);
-            }
+            } while (!calc.setSign(sign));
 
-            while (true) {
+            int operand2;
+
+            do {
                 System.out.print("Введите второе число: ");
-                int operand2 = scan.nextInt();
+                operand2 = scan.nextInt();
                 calc.setOperand2(operand2);
-                double result = calc.calculate();
-                if (!Double.isNaN(result)) {
-                    System.out.printf("%d %c %d = %.3f%n", operand1, sign, operand2, result);
-                    break;
+                if (Double.isNaN(calc.calculate())) {
+                    System.out.println("Ошибка: деление на ноль запрещено");
                 }
-                System.out.println("Ошибка: деление на ноль запрещено");
-            }
+            } while (Double.isNaN(calc.calculate()));
+
+            System.out.printf("%d %c %d = %.3f%n", operand1, sign, operand2, calc.calculate());
 
             do {
                 System.out.print("Хотите продолжить вычисления? [yes/no]:");
                 userAnswer = scan.next();
-                if (userAnswer.equals("yes")) {
-                    break;
-                } 
-                if (userAnswer.equals("no")) {
-                    return;
-                }
-            } while (true);
+            } while (!"yes".equals(userAnswer) && !"no".equals(userAnswer));
         } 
     }
 }

@@ -35,14 +35,10 @@ public class Calculator {
                 return (double) operand1 / operand2;
             case '^':
                 int result = 1;
-                int temp = operand2;
-                if (operand2 < 0) {
-                    temp = -operand2;
-                }
-                for (int i = 1; i <= temp; i++) {
+                for (int i = 1; i <= Math.abs(operand2); i++) {
                     result *= operand1;
                 }
-                return operand2 > 0 ? result : 1.0 / result;
+                return operand2 > 0 ? result : (double) 1 / result;
             case '%':
                 return operand1 % operand2;
             default:
