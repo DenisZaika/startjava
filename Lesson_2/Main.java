@@ -1,40 +1,40 @@
-public class Executor {
+public class Main {
     
     public static void main(String[] args) {
-        Processor processor = new Processor();
-        Verifier verifier = new Verifier();
-        executeProcessorMethods(processor);
-        executeVerifierMethods(verifier);
+        doNonBooleanMethods();
+        doBooleanMethods();
     }
 
-    public static void executeProcessorMethods(Processor processor) {
+    private static void doNonBooleanMethods() {
+        NonBooleanMethods nonBooleanMethods = new NonBooleanMethods();
         System.out.println("\n1. HЕ BOOLEAN-МЕТОДЫ");
-        processor.findLongestWord();
-        processor.selectMenuItem();
-        processor.calculateAverageGrade();
-        processor.countUniqueWords();
-        processor.showErrorMessage();
-        processor.syncDataWithCloud();
-        processor.restoreFromBackup();
-        processor.pauseDownload();
-        processor.resetSettings();
-        processor.writeToFile();
-        processor.convertCelsiusToFahrenheit();
-        processor.enterMathExpression();
-        processor.determineRaceWinner();
-        processor.findBookByAuthor();
+        nonBooleanMethods.findLongestWord();
+        nonBooleanMethods.selectMenuItem();
+        nonBooleanMethods.calculateAverageGrade();
+        nonBooleanMethods.countUniqueWords();
+        nonBooleanMethods.showErrorMessage();
+        nonBooleanMethods.syncDataWithCloud();
+        nonBooleanMethods.restoreFromBackup();
+        nonBooleanMethods.pauseDownload();
+        nonBooleanMethods.resetSettings();
+        nonBooleanMethods.writeToFile();
+        nonBooleanMethods.convertCelsiusToFahrenheit();
+        nonBooleanMethods.enterMathExpression();
+        nonBooleanMethods.determineRaceWinner();
+        nonBooleanMethods.findBookByAuthor();
     }
 
-    public static void executeVerifierMethods(Verifier verifier) {
+    private static void doBooleanMethods() {
+        BooleanMethods booleanMethods = new BooleanMethods();
         System.out.println("\n2. BOOLEAN-МЕТОДЫ");
-        System.out.println(verifier.shouldContinue());
-        System.out.println(verifier.hasUniqueDigit());
-        System.out.println(verifier.isLetter());
-        System.out.println(verifier.hasEqualDigits());
-        System.out.println(verifier.hasRemainigAttempts());
-        System.out.println(verifier.isEmptyString());
-        System.out.println(verifier.isEvenNumber());
-        System.out.println(verifier.isValidFilePath());
-        System.out.println(verifier.isExistingFile());
+        System.out.println(booleanMethods.shouldContinue());
+        System.out.println(booleanMethods.hasUniqueDigit());
+        System.out.println(booleanMethods.isLetter());
+        System.out.println(booleanMethods.hasEqualDigits());
+        System.out.println(booleanMethods.hasRemainigAttempts());
+        System.out.println(booleanMethods.isEmptyString());
+        System.out.println(booleanMethods.isEvenNumber());
+        System.out.println(booleanMethods.isValidFilePath());
+        System.out.println(booleanMethods.isExistingFile());
     }
 }

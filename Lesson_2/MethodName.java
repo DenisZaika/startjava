@@ -1,7 +1,6 @@
-public class Reflector {
+public class MethodName {
 
-    public static String getCurrMethodName() {
-        String methodName = Thread.currentThread().getStackTrace()[2].getMethodName();
-        return methodName;
+    public static String getCurrent() {
+        return Thread.currentThread().getStackTrace()[2].getMethodName();
     }
 }
