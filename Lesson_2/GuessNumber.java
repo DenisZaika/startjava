@@ -34,6 +34,5 @@ public class GuessNumber {
             System.out.printf("%s угадывает число: ", player.getName());
             playerGuess = scan.nextInt();
         } while (!player.setNumber(playerGuess));
-        return;
     }
 }
