@@ -10,21 +10,12 @@ public class GuessNumber {
         this.player2 = player2;
     }
 
-    public void readPlayerInput(Scanner scan, Player player) {
-        int playerGuess;
-        do {
-            System.out.printf("%s угадывает число: ", player.getName());
-            playerGuess = scan.nextInt();
-        } while (!player.setNumber(playerGuess));
-        return;
-    }
-
     public void start() {
         Scanner scan = new Scanner(System.in);
         int secretNumber = (int) (Math.random() * 100 + 1);
         Player currPlayer = player1;
         do {
-            readPlayerInput(scan, currPlayer);
+            inputNumber(scan, currPlayer);
             if (currPlayer.getNumber() == secretNumber) {
                 System.out.printf("Игрок %s победил!%n", currPlayer.getName());
                 return;
@@ -35,5 +26,14 @@ public class GuessNumber {
                     currPlayer.getName());
             currPlayer = currPlayer == player1 ? player2 : player1;
         } while (true);
+    }
+
+    private void inputNumber(Scanner scan, Player player) {
+        int playerGuess;
+        do {
+            System.out.printf("%s угадывает число: ", player.getName());
+            playerGuess = scan.nextInt();
+        } while (!player.setNumber(playerGuess));
+        return;
     }
 }
