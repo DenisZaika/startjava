@@ -1,9 +1,12 @@
+package com.startjava.lesson_1.base;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class VariablesTheme {
+        
     public static void main(String[] args) {
         final LocalTime verificationStartTime = LocalTime.now();
         final long startTime = System.nanoTime();

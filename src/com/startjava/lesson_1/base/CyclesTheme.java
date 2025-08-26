@@ -1,6 +1,9 @@
+package com.startjava.lesson_1.base;
+
 import java.util.Random;
 
 public class CyclesTheme {
+    
     public static void main(String[] args) {
         System.out.println("1. Вывод ASCII-символов\n");
         System.out.printf("%-10s%-12s%s%n", "DECIMAL", "CHARACTER", "DESCRIPTION");
