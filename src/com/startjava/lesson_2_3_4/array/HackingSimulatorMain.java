@@ -7,11 +7,11 @@ public class HackingSimulatorMain {
     public static final String ANSI_GREEN = "\u001B[32m";
 
     public static void main(String[] args) throws InterruptedException {
-        showSpinner();
-        startHacking();
+        int selectedNumber = perform();
+        showResult(selectedNumber);
     }
 
-    private static void showSpinner() throws InterruptedException {
+    private static int perform() throws InterruptedException {
         char[] spinnerSymbols = {'-', '\\', '|', '/'};
         System.out.print("Hacking: ");
         for (int i = 0; i < 3; i++) {
@@ -24,10 +24,10 @@ public class HackingSimulatorMain {
         System.out.print(spinnerSymbols[0]);
         Thread.sleep(300);
         System.out.print("\b");
+        return (int) (Math.random() * 100);
     }
 
-    private static void startHacking() {
-        int selectedNumber = (int) (Math.random() * 100);
+    private static void showResult(int selectedNumber) {
         if (selectedNumber > 70) {
             System.out.println(ANSI_RED + "Access Granted!" + ANSI_RESET);
         } else {
