@@ -1,6 +1,6 @@
 package com.startjava.lesson_2_3_4.array;
 
-public class HackingSimulatorMain {
+public class HackingSimulator {
 
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_RED = "\u001B[31m";
