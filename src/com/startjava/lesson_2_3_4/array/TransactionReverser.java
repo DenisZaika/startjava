@@ -5,30 +5,28 @@ import java.util.Arrays;
 public class TransactionReverser {
 
     public static void main(String[] args) {
-        int[] transactions1 = new int[0];
-        showTransactions(transactions1, reverseTransactions(transactions1));
-        int[] transactions2 = null;
-        showTransactions(transactions2, reverseTransactions(transactions2));
-        int[] transactions3 = new int[]{5};
-        showTransactions(transactions3, reverseTransactions(transactions3));
-        int[] transactions4 = new int[]{6, 8, 9, 1};
-        showTransactions(transactions4, reverseTransactions(transactions4));
-        int[] transactions5 = new int[]{13, 8, 5, 3, 2, 1, 1};
-        showTransactions(transactions5, reverseTransactions(transactions5));
+        int[][] allTransactionsList = {
+                new int[0],
+                null,
+                new int[]{5},
+                new int[]{6, 8, 9, 1},
+                new int[]{13, 8, 5, 3, 2, 1, 1}};
+        for (int[] transactionsList : allTransactionsList) {
+            showTransactions(transactionsList, reverseTransactions(transactionsList));
+        }
     }
 
-    private static int[] reverseTransactions(int[] transactions) {
-        if (transactions == null || transactions.length == 0) {
-            return transactions;
+    private static int[] reverseTransactions(int[] transactionsList) {
+        if (transactionsList == null || transactionsList.length == 0) {
+            return transactionsList;
         }
-        int len = transactions.length;
-        int[] reversedTransactions = new int[len];
-        int i = 0;
-        for (int transaction : transactions) {
-            reversedTransactions[len - i - 1] = transaction;
-            i++;
+        int len = transactionsList.length;
+        int[] reversedTransactionsList = new int[len];
+        for (int transaction : transactionsList) {
+            len--;
+            reversedTransactionsList[len] = transaction;
         }
-        return reversedTransactions;
+        return reversedTransactionsList;
     }
 
     private static void showTransactions(int[] transactions, int[] reversedTransactions) {
