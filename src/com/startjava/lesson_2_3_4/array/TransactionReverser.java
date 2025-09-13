@@ -5,28 +5,27 @@ import java.util.Arrays;
 public class TransactionReverser {
 
     public static void main(String[] args) {
-        int[][] allTransactionsList = {
-                new int[0],
+        int[][] originTransactions = {
+                {},
                 null,
-                new int[]{5},
-                new int[]{6, 8, 9, 1},
-                new int[]{13, 8, 5, 3, 2, 1, 1}};
-        for (int[] transactionsList : allTransactionsList) {
-            showTransactions(transactionsList, reverseTransactions(transactionsList));
+                {5},
+                {6, 8, 9, 1},
+                {13, 8, 5, 3, 2, 1, 1}};
+        for (int[] transactions : originTransactions) {
+            showTransactions(transactions, reverseTransactions(transactions));
         }
     }
 
-    private static int[] reverseTransactions(int[] transactionsList) {
-        if (transactionsList == null || transactionsList.length == 0) {
-            return transactionsList;
+    private static int[] reverseTransactions(int[] transactions) {
+        if (transactions == null || transactions.length == 0) {
+            return transactions;
         }
-        int len = transactionsList.length;
-        int[] reversedTransactionsList = new int[len];
-        for (int transaction : transactionsList) {
-            len--;
-            reversedTransactionsList[len] = transaction;
+        int len = transactions.length;
+        int[] reversedTransactions = new int[len];
+        for (int transaction : transactions) {
+            reversedTransactions[--len] = transaction;
         }
-        return reversedTransactionsList;
+        return reversedTransactions;
     }
 
     private static void showTransactions(int[] transactions, int[] reversedTransactions) {
