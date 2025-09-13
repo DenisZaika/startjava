@@ -3,15 +3,15 @@ package com.startjava.lesson_2_3_4.array;
 public class FactorialCalculator {
 
     public static void main(String[] args) {
-        int[][] factorialInputLists = {
-                new int[0],
+        int[][] factorialInputs = {
+                {},
                 null,
-                new int[]{8, 0, 9},
-                new int[]{-3, 1, 7, 13},
-                new int[]{-22, -0}
+                {8, 0, 9},
+                {-3, 1, 7, 13},
+                {-22, -0}
         };
-        for (int[] factorialInputs : factorialInputLists) {
-            showNumberFactorial(factorialInputs, calculateFactorial(factorialInputs));
+        for (int[] factorialInput : factorialInputs) {
+            showNumberFactorial(factorialInput, calculateFactorial(factorialInput));
         }
     }
 
