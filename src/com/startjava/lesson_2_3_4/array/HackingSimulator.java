@@ -25,8 +25,8 @@ public class HackingSimulator {
     private static void showHackingResult(int accessCode) {
         System.out.print("\b" +
                 (accessCode > 70
-                        ? ANSI_RED + " Access Granted!"
-                        : ANSI_GREEN + " Access Denied!") +
+                    ? ANSI_RED + " Access Granted!"
+                    : ANSI_GREEN + " Access Denied!") +
                 ANSI_RESET);
     }
 }
