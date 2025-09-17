@@ -8,10 +8,10 @@ public class ArrayElementsDeleting {
         for (int index : indexes) {
             fillArray(array);
             if (validateIndex(index, array)) {
-                System.out.print("\nИсходный массив: ");
+                System.out.print("\nИсходный массив:\n");
                 showArray(array);
                 deleteElementsMoreThan(index, array);
-                System.out.print("Измененный массив: ");
+                System.out.print("Измененный массив:\n");
                 showArray(array);
             }
         }
