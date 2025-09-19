@@ -6,16 +6,16 @@ import java.util.Random;
 public class UniqueNumbersArray {
 
     public static void main(String[] args) {
-        printUniqueNumbers(createArray(-30, -10, 23), 23);
-        printUniqueNumbers(createArray(10, 50, 10), 10);
-        printUniqueNumbers(createArray(-34, -34, 1), 1);
-        printUniqueNumbers(createArray(-1, 2, -3), -3);
-        printUniqueNumbers(createArray(5, -8, 2), 2);
+        printUniqueNumbers(createAndSortArray(-30, -10, 23), 23);
+        printUniqueNumbers(createAndSortArray(10, 50, 10), 10);
+        printUniqueNumbers(createAndSortArray(-34, -34, 1), 1);
+        printUniqueNumbers(createAndSortArray(-1, 2, -3), -3);
+        printUniqueNumbers(createAndSortArray(5, -8, 2), 2);
     }
 
-    private static int[] createArray(int rangeStart, int rangeEnd, int numbersPerString) {
-        if (numbersPerString < 1) {
-            System.out.printf("\nОшибка: количество чисел в строке не должно быть < 1 (%d)%n", numbersPerString);
+    private static int[] createAndSortArray(int rangeStart, int rangeEnd, int numbersPerLine) {
+        if (numbersPerLine < 1) {
+            System.out.printf("\nОшибка: количество чисел в строке не должно быть < 1 (%d)%n", numbersPerLine);
             return new int[0];
         }
         if (rangeStart > rangeEnd) {
@@ -46,18 +46,18 @@ public class UniqueNumbersArray {
                 }
             }
         }
+        Arrays.sort(uniqueNumbers);
         return uniqueNumbers;
     }
 
-    private static void printUniqueNumbers(int[] uniqueNumbers, int numbersPerString) {
+    private static void printUniqueNumbers(int[] uniqueNumbers, int numbersPerLine) {
         if (uniqueNumbers.length == 0) {
             return;
         }
-        Arrays.sort(uniqueNumbers);
         System.out.println("\n\nМассив уникальных чисел:");
         for (int i = 0; i < uniqueNumbers.length; i++) {
             System.out.print(uniqueNumbers[i] + " ");
-            if ((i + 1) % numbersPerString == 0) {
+            if ((i + 1) % numbersPerLine == 0) {
                 System.out.println();
             }
         }
