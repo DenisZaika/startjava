@@ -1,6 +1,6 @@
 package com.startjava.lesson_2_3_4.array;
 
-public class CharsSorter {
+public class TriangleCharsPrinter {
 
     public static void main(String[] args) {
         printCharsPyramid(sortChars('0', '9', true));
