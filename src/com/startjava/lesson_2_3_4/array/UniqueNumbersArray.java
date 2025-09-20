@@ -6,14 +6,14 @@ import java.util.Random;
 public class UniqueNumbersArray {
 
     public static void main(String[] args) {
-        printUniqueNumbers(createAndSortArray(-30, -10, 23), 23);
-        printUniqueNumbers(createAndSortArray(10, 50, 10), 10);
-        printUniqueNumbers(createAndSortArray(-34, -34, 1), 1);
-        printUniqueNumbers(createAndSortArray(-1, 2, -3), -3);
-        printUniqueNumbers(createAndSortArray(5, -8, 2), 2);
+        printUniqueNumbers(createSortedArray(-30, -10, 23), 23);
+        printUniqueNumbers(createSortedArray(10, 50, 10), 10);
+        printUniqueNumbers(createSortedArray(-34, -34, 1), 1);
+        printUniqueNumbers(createSortedArray(-1, 2, -3), -3);
+        printUniqueNumbers(createSortedArray(5, -8, 2), 2);
     }
 
-    private static int[] createAndSortArray(int rangeStart, int rangeEnd, int numbersPerLine) {
+    private static int[] createSortedArray(int rangeStart, int rangeEnd, int numbersPerLine) {
         if (numbersPerLine < 1) {
             System.out.printf("\nОшибка: количество чисел в строке не должно быть < 1 (%d)%n", numbersPerLine);
             return new int[0];
