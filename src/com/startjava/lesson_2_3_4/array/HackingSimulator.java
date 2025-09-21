@@ -1,10 +1,9 @@
 package com.startjava.lesson_2_3_4.array;
 
 public class HackingSimulator {
-
-    public static final String ANSI_RESET = "\u001B[0m";
-    public static final String ANSI_RED = "\u001B[31m";
-    public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_RESET = "[0m";
+    public static final String ANSI_RED = "[31m";
+    public static final String ANSI_GREEN = "[32m";
 
     public static void main(String[] args) throws InterruptedException {
         int selectedNumber = hackPassword();
