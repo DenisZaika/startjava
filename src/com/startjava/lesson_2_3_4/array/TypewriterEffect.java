@@ -1,7 +1,6 @@
 package com.startjava.lesson_2_3_4.array;
 
 public class TypewriterEffect {
-
     public static void main(String[] args) throws InterruptedException {
         String text1 = """
                 Чтобы написать чистый код, мы сначала пишем грязный код, затем рефакторим его.
