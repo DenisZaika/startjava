@@ -1,7 +1,6 @@
 package com.startjava.lesson_2_3_4.array;
 
 public class TriangleCharsPrinter {
-
     public static void main(String[] args) {
         printTriangleChars(formTriangleParts('0', '9', true));
         printTriangleChars(formTriangleParts('/', '!', false));
@@ -10,7 +9,8 @@ public class TriangleCharsPrinter {
 
     private static String[] formTriangleParts(char rangeStart, char rangeEnd, boolean isAscendingOrder) {
         if (rangeStart > rangeEnd) {
-            System.out.printf("Ошибка: левая граница (%d) > правой (%d)%n%n", (int) rangeStart, (int) rangeEnd);
+            System.out.printf("Ошибка: левая граница (%d) > правой (%d)%n%n",
+                    (int) rangeStart, (int) rangeEnd);
             return new String[0];
         }
         String[] triangleParts = new String[rangeEnd - rangeStart + 1];
