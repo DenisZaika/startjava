@@ -1,7 +1,6 @@
 package com.startjava.lesson_2_3_4.array;
 
 public class ArrayElementsDeleting {
-
     public static void main(String[] args) {
         int[] indexes = {-1, 15, 0, 14};
         float[] array = new float[15];
