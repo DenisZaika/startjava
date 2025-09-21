@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class UniqueNumbersArray {
-
     public static void main(String[] args) {
         printUniqueNumbers(createSortedArray(-30, -10, 23), 23);
         printUniqueNumbers(createSortedArray(10, 50, 10), 10);
@@ -15,7 +14,8 @@ public class UniqueNumbersArray {
 
     private static int[] createSortedArray(int rangeStart, int rangeEnd, int numbersPerLine) {
         if (numbersPerLine < 1) {
-            System.out.printf("\nОшибка: количество чисел в строке не должно быть < 1 (%d)%n", numbersPerLine);
+            System.out.printf("\nОшибка: количество чисел в строке не должно быть < 1 (%d)%n",
+                    numbersPerLine);
             return new int[0];
         }
         if (rangeStart > rangeEnd) {
