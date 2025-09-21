@@ -1,14 +1,13 @@
 package com.startjava.lesson_2_3_4.array;
 
 public class FactorialCalculator {
-
     public static void main(String[] args) {
         int[][] inputNumbers = {
-            {},
-            null,
-            {8, 0, 9},
-            {-3, 1, 7, 13},
-            {-22, -0}
+                {},
+                null,
+                {8, 0, 9},
+                {-3, 1, 7, 13},
+                {-22, -0}
         };
         for (int[] number : inputNumbers) {
             printFactorialExpressions(number, calculate(number));
