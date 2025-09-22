@@ -4,13 +4,14 @@ import java.util.Arrays;
 
 public class TypewriterEffect {
     public static void main(String[] args) throws InterruptedException {
-        String text1 = "Чтобы написать чистый код, мы сначала пишем грязный код, затем рефакторим его.\n" +
-                "- Robert Martin";
-        String text2 = "Java - это C++, из которого убрали все пистолеты, ножи и дубинки.\n" +
-                "- James Gosling";
-        String text3 = null;
-        String text4 = "";
-        String[] texts = {text1, text2, text3, text4};
+        String[] texts = {
+                "Чтобы написать чистый код, мы сначала пишем грязный код, затем рефакторим его.\n" +
+                        "- Robert Martin",
+                "Java - это C++, из которого убрали все пистолеты, ножи и дубинки.\n - James Gosling",
+                null,
+                ""
+        };
+
         for (String text : texts) {
             int[] minMaxIndexes = findShortestAndLongestWordIndexes(text);
             type(toUpperCaseRange(minMaxIndexes, text));
@@ -33,8 +34,7 @@ public class TypewriterEffect {
         for (int i = 0; i < words.length; i++) {
             if (words[i].length() > words[maxLengthIndex].length()) {
                 maxLengthIndex = i;
-            }
-            if (words[i].length() < words[minLengthIndex].length()) {
+            } else if (words[i].length() < words[minLengthIndex].length()) {
                 minLengthIndex = i;
             }
         }
@@ -46,20 +46,18 @@ public class TypewriterEffect {
             return "";
         }
         Arrays.sort(minMaxIndexes);
-        String textWithMarkers = originText.replace("\n", "/n");
-        String[] words = textWithMarkers.split("\\s+");
+        String[] words = originText.split("\\s+");
         int wordIndex = 0;
         for (int i = 0; i < words.length; i++) {
-            if (!words[i].matches("\\p{P}")) {
+            String cleanWord = words[i].replaceAll("\\p{P}", "");
+            if (!cleanWord.isEmpty()) {
                 if ((wordIndex >= minMaxIndexes[0]) && (wordIndex <= minMaxIndexes[1])) {
                     words[i] = words[i].toUpperCase();
                 }
                 wordIndex++;
             }
         }
-        String formattedText = String.join(" ", words);
-        formattedText = formattedText.replaceAll("(?i)/n", "\n");
-        return formattedText;
+        return String.join(" ", words);
     }
 
     private static void type(String originText) throws InterruptedException {
