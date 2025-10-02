@@ -6,23 +6,20 @@ public class HangmanGameMain {
     public static void main(String[] args) {
         HangmanGame hangman = new HangmanGame();
         Scanner scan = new Scanner(System.in);
-        String playerAnswer;
+        String playerAnswer = "yes";
+        boolean isCorrect = true;
         do {
-            hangman.start();
-            System.out.print("Хотите продолжить игру? [yes/no]: ");
-            playerAnswer = scan.nextLine().toLowerCase();
-            if (!"yes".equals(playerAnswer) && !"no".equals(playerAnswer)) {
-                playerAnswer = getValidAnswer(scan);
+            if (isCorrect) {
+                if (playerAnswer.equals("no")) {
+                    break;
+                }
+                hangman.start();
+                System.out.print("Хотите продолжить игру? [yes/no]: ");
+            } else {
+                System.out.print("Введите корректный ответ [yes / no]: ");
             }
-        } while ("yes".equals(playerAnswer));
-    }
-
-    private static String getValidAnswer(Scanner scan) {
-        String playerAnswer;
-        do {
-            System.out.print("Введите корректный ответ [yes / no]: ");
             playerAnswer = scan.nextLine().toLowerCase();
-        } while (!"yes".equals(playerAnswer) && !"no".equals(playerAnswer));
-        return playerAnswer;
+            isCorrect = playerAnswer.equals("yes") || playerAnswer.equals("no");
+        } while (true);
     }
 }
