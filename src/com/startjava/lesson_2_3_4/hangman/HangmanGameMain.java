@@ -7,9 +7,9 @@ public class HangmanGameMain {
         HangmanGame hangman = new HangmanGame();
         Scanner scan = new Scanner(System.in);
         String playerAnswer = "yes";
-        boolean isCorrect = true;
+        boolean isCorrectAnswer = true;
         do {
-            if (isCorrect) {
+            if (isCorrectAnswer) {
                 if (playerAnswer.equals("no")) {
                     break;
                 }
@@ -19,7 +19,7 @@ public class HangmanGameMain {
                 System.out.print("Введите корректный ответ [yes / no]: ");
             }
             playerAnswer = scan.nextLine().toLowerCase();
-            isCorrect = playerAnswer.equals("yes") || playerAnswer.equals("no");
+            isCorrectAnswer = playerAnswer.equals("yes") || playerAnswer.equals("no");
         } while (true);
     }
 }
