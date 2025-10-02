@@ -4,47 +4,46 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class HangmanGame {
-    private final String[] words = new String[]{"mounting", "gameplay", "kitty", "microwave", "smartphone"};
-    private final Random random = new Random();
-    private final String[] hangmanParts = new String[]{"_______",
-            "|     |",
-            "|     @",
-            "|    /|\\",
-            "|    / \\",
-            "| GAME OVER!"
-    };
-
+    private final String[] words;
+    private final String[] gallows;
     private String secretWord;
     private int attemptsLeft;
-    private StringBuilder incorrectLetters;
-    private StringBuilder correctLetters;
+    private StringBuilder wrongLetters;
+    private StringBuilder guessedWord;
     private char enteredLetter;
 
+    public HangmanGame() {
+        words = new String[]{"mounting", "gameplay", "kitty", "microwave", "smartphone"};
+        gallows = new String[]{"_______",
+                "|     |",
+                "|     @",
+                "|    /|\\",
+                "|    / \\",
+                "| GAME OVER!"
+        };
+    }
+
     public void start() {
-        incorrectLetters = new StringBuilder();
-        correctLetters = new StringBuilder();
+        wrongLetters = new StringBuilder();
         chooseRandomWord();
-        attemptsLeft = hangmanParts.length;
-        System.out.print("Угадываемое слово: ");
-
-        for (int i = 0; i < secretWord.length(); i++) {
-            System.out.print("*");
-        }
-
+        guessedWord = new StringBuilder("*".repeat(secretWord.length()));
+        attemptsLeft = gallows.length;
+        System.out.print("Угадываемое слово: " + guessedWord);
         System.out.println();
         Scanner scan = new Scanner(System.in);
 
         do {
             System.out.println("Осталось попыток: " + attemptsLeft);
-            if (!incorrectLetters.isEmpty()) {
-                System.out.println("Ошибочные буквы: " + incorrectLetters);
+            if (!wrongLetters.isEmpty()) {
+                System.out.println("Ошибочные буквы: " + wrongLetters);
             }
             inputLetter(scan);
-            if (isWordGuessed()) {
+            if (!guessedWord.toString().contains("*")) {
                 System.out.println("Поздравляем! Игра окончена! Вы угадали слово: " +
                         secretWord.toUpperCase());
                 return;
             }
+            System.out.print("Угадываемое слово: " + guessedWord);
             printHangman();
             if (attemptsLeft == 0) {
                 System.out.println("Игра проиграна. Загаданное слово: " + secretWord.toUpperCase());
@@ -54,6 +53,7 @@ public class HangmanGame {
     }
 
     public void chooseRandomWord() {
+        Random random = new Random();
         secretWord = words[random.nextInt(words.length)];
     }
 
@@ -72,12 +72,13 @@ public class HangmanGame {
     }
 
     public boolean isValidLetter() {
-        if (!Character.isLetter(enteredLetter)) {
+        if (enteredLetter < 'a' || enteredLetter > 'z') {
             System.out.println("Ошибка: введен символ, отличный от кириллицы");
             return false;
         }
-        if (correctLetters.toString().indexOf(enteredLetter) >= 0 ||
-                incorrectLetters.toString().indexOf(enteredLetter) >= 0) {
+        char upperCaseLetter = Character.toUpperCase(enteredLetter);
+        if (guessedWord.toString().contains(Character.toString(upperCaseLetter)) ||
+                wrongLetters.toString().indexOf(enteredLetter) >= 0) {
             System.out.println("Эту букву вы уже вводили!");
             return false;
         }
@@ -89,34 +90,23 @@ public class HangmanGame {
             if (attemptsLeft < 6) {
                 attemptsLeft++;
             }
-            System.out.println("Верно! Буква " + enteredLetter + " есть в слове!");
-            correctLetters.append(enteredLetter).append(" ");
+            System.out.println("Верно! Буква \"" + enteredLetter + "\" есть в слове!");
+            for (int i = 0; i < secretWord.length(); i++) {
+                if (secretWord.charAt(i) == enteredLetter) {
+                    guessedWord.setCharAt(i, Character.toUpperCase(enteredLetter));
+                }
+            }
         } else {
-            System.out.println("Неверно! Буквы " + enteredLetter + " нет в слове!");
-            incorrectLetters.append(enteredLetter).append(" ");
+            System.out.println("Неверно! Буквы \"" + enteredLetter + "\" нет в слове!");
+            wrongLetters.append(enteredLetter).append(" ");
             attemptsLeft--;
         }
     }
 
-    public boolean isWordGuessed() {
-        System.out.print("Угадываемое слово: ");
-        boolean isWordCompleted = true;
-        for (char wordLetter : secretWord.toCharArray()) {
-            if (correctLetters.toString().indexOf(wordLetter) >= 0) {
-                System.out.print(Character.toUpperCase(wordLetter));
-            } else {
-                System.out.print("*");
-                isWordCompleted = false;
-            }
-        }
-        System.out.println();
-        return isWordCompleted;
-    }
-
     public void printHangman() {
-        System.out.println("Виселица:");
-        for (int i = 0; i < hangmanParts.length - attemptsLeft; i++) {
-            System.out.println(hangmanParts[i]);
+        System.out.println("\nВиселица:");
+        for (int i = 0; i < gallows.length - attemptsLeft; i++) {
+            System.out.println(gallows[i]);
         }
     }
 }
