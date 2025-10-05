@@ -4,22 +4,17 @@ import java.util.Scanner;
 
 public class HangmanGameMain {
     public static void main(String[] args) {
-        HangmanGame hangman = new HangmanGame();
         Scanner scan = new Scanner(System.in);
         String playerAnswer = "yes";
-        boolean isCorrectAnswer = true;
-        do {
-            if (isCorrectAnswer) {
-                if (playerAnswer.equals("no")) {
-                    break;
-                }
+        while (!playerAnswer.equals("no")) {
+            if (playerAnswer.equals("yes")) {
+                HangmanGame hangman = new HangmanGame();
                 hangman.start();
                 System.out.print("Хотите продолжить игру? [yes/no]: ");
             } else {
                 System.out.print("Введите корректный ответ [yes / no]: ");
             }
             playerAnswer = scan.nextLine().toLowerCase();
-            isCorrectAnswer = playerAnswer.equals("yes") || playerAnswer.equals("no");
-        } while (true);
+        }
     }
 }
