@@ -5,15 +5,18 @@ import java.util.Scanner;
 
 public class HangmanGame {
     private final String[] words;
+    private final String secretWord;
+    private final StringBuilder guessedWord;
     private final String[] gallows;
-    private String secretWord;
+    private final StringBuilder wrongLetters;
+
     private int attemptsLeft;
-    private StringBuilder wrongLetters;
-    private StringBuilder guessedWord;
     private char enteredLetter;
 
     public HangmanGame() {
-        words = new String[]{"mounting", "gameplay", "kitty", "microwave", "smartphone"};
+        words = new String[]{"монтаж", "холодильник", "дерево", "окно", "смартфон"};
+        secretWord = chooseRandomWord();
+        guessedWord = new StringBuilder("*".repeat(secretWord.length()));
         gallows = new String[]{"_______",
                 "|     |",
                 "|     @",
@@ -21,40 +24,29 @@ public class HangmanGame {
                 "|    / \\",
                 "| GAME OVER!"
         };
+        attemptsLeft = gallows.length;
+        wrongLetters = new StringBuilder();
+    }
+
+    public String chooseRandomWord() {
+        Random random = new Random();
+        return words[random.nextInt(words.length)];
     }
 
     public void start() {
-        wrongLetters = new StringBuilder();
-        chooseRandomWord();
-        guessedWord = new StringBuilder("*".repeat(secretWord.length()));
-        attemptsLeft = gallows.length;
-        System.out.print("Угадываемое слово: " + guessedWord);
-        System.out.println();
         Scanner scan = new Scanner(System.in);
-
         do {
-            System.out.println("Осталось попыток: " + attemptsLeft);
-            if (!wrongLetters.isEmpty()) {
-                System.out.println("Ошибочные буквы: " + wrongLetters);
-            }
+            printGameState();
             inputLetter(scan);
-            if (!guessedWord.toString().contains("*")) {
-                System.out.println("Поздравляем! Игра окончена! Вы угадали слово: " +
-                        secretWord.toUpperCase());
-                return;
-            }
-            System.out.print("Угадываемое слово: " + guessedWord);
-            printHangman();
-            if (attemptsLeft == 0) {
-                System.out.println("Игра проиграна. Загаданное слово: " + secretWord.toUpperCase());
-                return;
-            }
-        } while (true);
+        } while (!isGameFinished());
     }
 
-    public void chooseRandomWord() {
-        Random random = new Random();
-        secretWord = words[random.nextInt(words.length)];
+    public void printGameState() {
+        System.out.println("Угадываемое слово: " + guessedWord);
+        System.out.println("Осталось попыток: " + attemptsLeft);
+        if (!wrongLetters.isEmpty()) {
+            System.out.println("Ошибочные буквы: " + wrongLetters);
+        }
     }
 
     public void inputLetter(Scanner scan) {
@@ -72,7 +64,7 @@ public class HangmanGame {
     }
 
     public boolean isValidLetter() {
-        if (enteredLetter < 'a' || enteredLetter > 'z') {
+        if (enteredLetter < 'а' || enteredLetter > 'я') {
             System.out.println("Ошибка: введен символ, отличный от кириллицы");
             return false;
         }
@@ -87,7 +79,7 @@ public class HangmanGame {
 
     public void findLetterInWord() {
         if (secretWord.indexOf(enteredLetter) >= 0) {
-            if (attemptsLeft < 6) {
+            if (attemptsLeft < gallows.length) {
                 attemptsLeft++;
             }
             System.out.println("Верно! Буква \"" + enteredLetter + "\" есть в слове!");
@@ -103,10 +95,25 @@ public class HangmanGame {
         }
     }
 
-    public void printHangman() {
+    public boolean isGameFinished() {
+        if (!guessedWord.toString().contains("*")) {
+            System.out.println("Поздравляем! Игра окончена! Вы угадали слово: " +
+                    secretWord.toUpperCase());
+            return true;
+        }
+        if (attemptsLeft == 0) {
+            System.out.println("Игра проиграна. Загаданное слово: " + secretWord.toUpperCase());
+            return true;
+        }
+        printGallows();
+        return false;
+    }
+
+    public void printGallows() {
         System.out.println("\nВиселица:");
         for (int i = 0; i < gallows.length - attemptsLeft; i++) {
             System.out.println(gallows[i]);
         }
+        System.out.println();
     }
 }
