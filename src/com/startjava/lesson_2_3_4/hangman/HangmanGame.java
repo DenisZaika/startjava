@@ -38,6 +38,7 @@ public class HangmanGame {
         do {
             printGameState();
             inputLetter(scan);
+            printGallows();
         } while (!isGameFinished());
     }
 
@@ -105,7 +106,6 @@ public class HangmanGame {
             System.out.println("Игра проиграна. Загаданное слово: " + secretWord.toUpperCase());
             return true;
         }
-        printGallows();
         return false;
     }
 
