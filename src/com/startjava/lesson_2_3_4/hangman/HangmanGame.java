@@ -28,7 +28,7 @@ public class HangmanGame {
         wrongLetters = new StringBuilder();
     }
 
-    public String chooseRandomWord() {
+    private String chooseRandomWord() {
         Random random = new Random();
         return words[random.nextInt(words.length)];
     }
@@ -42,7 +42,7 @@ public class HangmanGame {
         } while (!isGameFinished());
     }
 
-    public void printGameState() {
+    private void printGameState() {
         System.out.println("Угадываемое слово: " + guessedWord);
         System.out.println("Осталось попыток: " + attemptsLeft);
         if (!wrongLetters.isEmpty()) {
@@ -50,7 +50,7 @@ public class HangmanGame {
         }
     }
 
-    public void inputLetter(Scanner scan) {
+    private void inputLetter(Scanner scan) {
         do {
             System.out.print("Введите букву: ");
             String input = scan.nextLine();
@@ -64,7 +64,7 @@ public class HangmanGame {
         findLetterInWord();
     }
 
-    public boolean isValidLetter() {
+    private boolean isValidLetter() {
         if (enteredLetter < 'а' || enteredLetter > 'я') {
             System.out.println("Ошибка: введен символ, отличный от кириллицы");
             return false;
@@ -78,7 +78,7 @@ public class HangmanGame {
         return true;
     }
 
-    public void findLetterInWord() {
+    private void findLetterInWord() {
         if (secretWord.indexOf(enteredLetter) >= 0) {
             if (attemptsLeft < gallows.length) {
                 attemptsLeft++;
@@ -96,7 +96,7 @@ public class HangmanGame {
         }
     }
 
-    public boolean isGameFinished() {
+    private boolean isGameFinished() {
         if (!guessedWord.toString().contains("*")) {
             System.out.println("Поздравляем! Игра окончена! Вы угадали слово: " +
                     secretWord.toUpperCase());
@@ -109,7 +109,7 @@ public class HangmanGame {
         return false;
     }
 
-    public void printGallows() {
+    private void printGallows() {
         System.out.println("\nВиселица:");
         for (int i = 0; i < gallows.length - attemptsLeft; i++) {
             System.out.println(gallows[i]);
