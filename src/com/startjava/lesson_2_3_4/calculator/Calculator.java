@@ -26,12 +26,13 @@ public class Calculator {
     }
 
     private boolean isValidExpr() {
-        if (!mathExpr[1].equals("+") && !mathExpr[1].equals("-") && !mathExpr[1].equals("*") &&
-                !mathExpr[1].equals("/") && !mathExpr[1].equals("^") && !mathExpr[1].equals("%")) {
-            System.out.println("Ошибка: операция (" + mathExpr[1] + ") не поддерживается");
+        String mathSign = mathExpr[1];
+        if (!mathSign.equals("+") && !mathSign.equals("-") && !mathSign.equals("*") &&
+                !mathSign.equals("/") && !mathSign.equals("^") && !mathSign.equals("%")) {
+            System.out.println("Ошибка: операция (" + mathSign + ") не поддерживается");
             return false;
         }
-        if (mathExpr[2].equals("0") && (mathExpr[1].equals("/") || mathExpr[1].equals("%"))) {
+        if (mathExpr[2].equals("0") && (mathSign.equals("/") || mathSign.equals("%"))) {
             System.out.println("Ошибка: деление на ноль запрещено");
             return false;
         }
