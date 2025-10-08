@@ -14,9 +14,6 @@ public class CalculatorTest {
                 String mathExpr = scan.nextLine();
                 Calculator calc = new Calculator(mathExpr);
                 double result = calc.calculate();
-                if (Double.isNaN(result)) {
-                    continue;
-                }
                 outputResult(mathExpr, result);
                 System.out.print("Хотите продолжить вычисления? [yes/no]: ");
             } else {
@@ -27,6 +24,9 @@ public class CalculatorTest {
     }
 
     private static void outputResult(String mathExpr, double result) {
+        if (Double.isNaN(result)) {
+            return;
+        }
         DecimalFormat df = new DecimalFormat("#.###");
         System.out.println(mathExpr + " = " + df.format(result));
     }
