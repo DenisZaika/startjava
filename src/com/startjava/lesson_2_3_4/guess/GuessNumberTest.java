@@ -3,27 +3,29 @@ package com.startjava.lesson_2_3_4.guess;
 import java.util.Scanner;
 
 public class GuessNumberTest {
-    
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
 
-        System.out.print("Введите имя первого игрока: ");
-        String name1 = scan.nextLine();
-        Player player1 = new Player(name1);
-
-        System.out.print("Введите имя второго игрока: ");
-        String name2 = scan.nextLine();
-        Player player2 = new Player(name2);
+        Player player1 = createPlayer(scan, "первого");
+        Player player2 = createPlayer(scan, "второго");
 
         GuessNumber game = new GuessNumber(player1, player2);
-        String playerAnswer;
+        String playerAnswer = "yes";
 
-        do {
-            game.start();
-            do {
+        while (!"no".equals(playerAnswer)) {
+            if ("yes".equals(playerAnswer)) {
+                game.start();
                 System.out.print("Хотите продолжить игру? [yes/no]: ");
-                playerAnswer = scan.nextLine();
-            } while (!"yes".equals(playerAnswer) && !"no".equals(playerAnswer));
-        } while ("yes".equals(playerAnswer));
+            } else {
+                System.out.print("Введите корректный ответ [yes / no]: ");
+            }
+            playerAnswer = scan.nextLine().toLowerCase();
+        }
+    }
+
+    private static Player createPlayer(Scanner scan, String playerTurn) {
+        System.out.print("Введите имя " + playerTurn + " игрока: ");
+        String name = scan.nextLine();
+        return new Player(name);
     }
 }
