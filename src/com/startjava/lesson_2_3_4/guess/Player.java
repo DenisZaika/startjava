@@ -7,12 +7,12 @@ public class Player {
 
     private final String name;
     private final int[] numbers;
-    private int attemptNumber;
+    private int attemptCount;
 
     public Player(String name) {
         this.name = name;
         numbers = new int[MAX_ATTEMPTS];
-        attemptNumber = 0;
+        attemptCount = 1;
     }
 
     public String getName() {
@@ -20,35 +20,30 @@ public class Player {
     }
 
     public int[] getNumbers() {
-        return Arrays.copyOf(numbers, attemptNumber);
+        return Arrays.copyOf(numbers, attemptCount - 1);
     }
 
-    public void setNumbers(int number) throws InvalidNumberException {
-        if (number < 1 || number > 100) {
-            throw new InvalidNumberException("Число должно входить в отрезок [1, 100]\nПопробуйте еще раз: ");
+    public int getAttemptCount() {
+        return attemptCount;
+    }
+
+    public void addNumber(int number) throws InvalidNumberException {
+        if (number < GuessNumber.RANGE_MIN || number > GuessNumber.RANGE_MAX) {
+            throw new InvalidNumberException("Число должно входить в отрезок [" + GuessNumber.RANGE_MIN +
+                    ", " + GuessNumber.RANGE_MAX + "]\nПопробуйте еще раз: ");
         }
-        numbers[attemptNumber - 1] = number;
-    }
-
-    public int getAttemptNumber() {
-        return attemptNumber;
-    }
-
-    public void incrementAttempts() {
-        if (attemptNumber < MAX_ATTEMPTS) {
-            attemptNumber++;
+        numbers[attemptCount - 1] = number;
+        if (attemptCount < MAX_ATTEMPTS) {
+            attemptCount++;
         }
     }
 
     public boolean hasAttempts() {
-        return attemptNumber < MAX_ATTEMPTS;
+        return attemptCount < MAX_ATTEMPTS;
     }
 
-    public void resetAttempts() {
-        attemptNumber = 0;
-    }
-
-    public void cleanNumbers() {
-        Arrays.fill(numbers, 0, attemptNumber, 0);
+    public void clear() {
+        Arrays.fill(numbers, 0, attemptCount, 0);
+        attemptCount = 1;
     }
 } 
