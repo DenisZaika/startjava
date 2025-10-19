@@ -5,12 +5,14 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class GuessNumber {
-    public static final int RANGE_MIN = 1;
-    public static final int RANGE_MAX = 100;
+    public static final int MIN_RANGE = 1;
+    public static final int MAX_RANGE = 100;
+    public static final int PLAYER_COUNT = 2;
 
     private final Player player1;
     private final Player player2;
     private int secretNumber;
+    private Player currPlayer;
     private final Scanner scan;
 
     public GuessNumber(Player player1, Player player2) {
@@ -22,17 +24,22 @@ public class GuessNumber {
     public void start() {
         initGame();
         Random r = new Random();
-        secretNumber = (r.nextInt(RANGE_MIN, RANGE_MAX + 1));
+        secretNumber = (r.nextInt(MIN_RANGE, MAX_RANGE + 1));
         System.out.println("\nИгра началась! У каждого игрока по " + Player.MAX_ATTEMPTS + " попыток");
-        Player currPlayer = player1;
         boolean gameWon = false;
+        int inactivePlayerCount = 0;
         do {
-            if (isGuessed(tryGuess(currPlayer), currPlayer)) {
+            currPlayer.increaseCurrAttempt();
+            tryGuess(currPlayer);
+            if (isGuessed(currPlayer)) {
                 gameWon = true;
-            } else {
-                currPlayer = currPlayer == player1 ? player2 : player1;
+                break;
             }
-        } while ((player1.hasAttempts() || player2.hasAttempts()) && !gameWon);
+            if (!currPlayer.hasAttempts()) {
+                inactivePlayerCount++;
+            }
+            changeCurrPlayer();
+        } while (inactivePlayerCount < PLAYER_COUNT);
         if (!gameWon) {
             System.out.println("\nНикто не угадал число!");
         }
@@ -43,43 +50,48 @@ public class GuessNumber {
     }
 
     private void initGame() {
+        currPlayer = player1;
         player1.clear();
         player2.clear();
     }
 
-    private int tryGuess(Player player) {
-        System.out.println("\nПопытка " + player.getAttemptCount());
+    private void tryGuess(Player player) {
+        System.out.println("\nПопытка " + (player.getCurrAttempt()));
         System.out.printf("Число вводит %s: ", player.getName());
-        return inputNumber(player);
+        inputNumber(player);
     }
 
-    private int inputNumber(Player player) {
-        int playerGuess;
+    private void inputNumber(Player player) {
         do {
             try {
-                playerGuess = scan.nextInt();
-                player.addNumber(playerGuess);
-                return playerGuess;
+                player.addNumber(scan.nextInt());
+                return;
             } catch (InvalidNumberException e) {
                 System.out.print(e.getMessage());
             }
+            System.out.print("Попробуйте еще раз: ");
         } while (true);
     }
 
-    private boolean isGuessed(int playerGuess, Player player) {
+    private boolean isGuessed(Player player) {
+        int playerGuess = player.getNumbers()[player.getCurrAttempt() - 1];
         if (playerGuess == secretNumber) {
-            System.out.printf("%s угадал число %d с %d-й попытки%n", player.getName(), playerGuess,
-                    player.getAttemptCount() - 1);
+            System.out.printf("%s угадал число %d с %d-й попытки%n",
+                    player.getName(), secretNumber, player.getCurrAttempt());
             return true;
         }
         String hint = playerGuess < secretNumber ? "меньше" : "больше";
         System.out.printf("%d %s того, что загадал компьютер%n", playerGuess, hint);
         System.out.printf("Игрок %s не угадал число. Ход переходит к следующему игроку%n",
                 player.getName());
-        if (player.getAttemptCount() == Player.MAX_ATTEMPTS) {
+        if (player.getCurrAttempt() == Player.MAX_ATTEMPTS) {
             System.out.println("У " + player.getName() + " закончились попытки");
         }
         return false;
+    }
+
+    private void changeCurrPlayer() {
+        currPlayer = currPlayer == player1 ? player2 : player1;
     }
 
     private void printPlayerNumbers(Player player) {
