@@ -7,12 +7,12 @@ public class Player {
 
     private final String name;
     private final int[] numbers;
-    private int attemptCount;
+    private int currAttempt;
 
     public Player(String name) {
         this.name = name;
         numbers = new int[MAX_ATTEMPTS];
-        attemptCount = 1;
+        currAttempt = 0;
     }
 
     public String getName() {
@@ -20,30 +20,34 @@ public class Player {
     }
 
     public int[] getNumbers() {
-        return Arrays.copyOf(numbers, attemptCount - 1);
+        return Arrays.copyOf(numbers, currAttempt);
     }
 
-    public int getAttemptCount() {
-        return attemptCount;
-    }
-
-    public void addNumber(int number) throws InvalidNumberException {
-        if (number < GuessNumber.RANGE_MIN || number > GuessNumber.RANGE_MAX) {
-            throw new InvalidNumberException("Число должно входить в отрезок [" + GuessNumber.RANGE_MIN +
-                    ", " + GuessNumber.RANGE_MAX + "]\nПопробуйте еще раз: ");
-        }
-        numbers[attemptCount - 1] = number;
-        if (attemptCount < MAX_ATTEMPTS) {
-            attemptCount++;
-        }
-    }
-
-    public boolean hasAttempts() {
-        return attemptCount < MAX_ATTEMPTS;
+    public int getCurrAttempt() {
+        return currAttempt;
     }
 
     public void clear() {
-        Arrays.fill(numbers, 0, attemptCount, 0);
-        attemptCount = 1;
+        Arrays.fill(numbers, 0, currAttempt, 0);
+        currAttempt = 0;
+    }
+
+    public void increaseCurrAttempt() {
+        if (currAttempt < MAX_ATTEMPTS) {
+            currAttempt++;
+        }
+    }
+
+    public void addNumber(int number) {
+        if (number < GuessNumber.MIN_RANGE || number > GuessNumber.MAX_RANGE) {
+            throw new InvalidNumberException("Число должно входить в отрезок [" +
+                    GuessNumber.MIN_RANGE +
+                    ", " + GuessNumber.MAX_RANGE + "]\n");
+        }
+        numbers[currAttempt - 1] = number;
+    }
+
+    public boolean hasAttempts() {
+        return currAttempt < MAX_ATTEMPTS;
     }
 } 
