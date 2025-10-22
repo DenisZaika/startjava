@@ -24,12 +24,11 @@ public class GuessNumber {
     public void start() {
         initGame();
         Random r = new Random();
-        secretNumber = (r.nextInt(MIN_RANGE, MAX_RANGE + 1));
+        secretNumber = r.nextInt(MIN_RANGE, MAX_RANGE + 1);
         System.out.println("\nИгра началась! У каждого игрока по " + Player.MAX_ATTEMPTS + " попыток");
         boolean gameWon = false;
         int inactivePlayerCount = 0;
         do {
-            currPlayer.increaseCurrAttempt();
             tryGuess(currPlayer);
             if (isGuessed(currPlayer)) {
                 gameWon = true;
@@ -37,6 +36,7 @@ public class GuessNumber {
             }
             if (!currPlayer.hasAttempts()) {
                 inactivePlayerCount++;
+                System.out.println("У " + currPlayer.getName() + " закончились попытки");
             }
             changeCurrPlayer();
         } while (inactivePlayerCount < PLAYER_COUNT);
@@ -56,6 +56,7 @@ public class GuessNumber {
     }
 
     private void tryGuess(Player player) {
+        currPlayer.increaseCurrAttempt();
         System.out.println("\nПопытка " + (player.getCurrAttempt()));
         System.out.printf("Число вводит %s: ", player.getName());
         inputNumber(player);
@@ -74,7 +75,7 @@ public class GuessNumber {
     }
 
     private boolean isGuessed(Player player) {
-        int playerGuess = player.getNumbers()[player.getCurrAttempt() - 1];
+        int playerGuess = player.getCurrNumber();
         if (playerGuess == secretNumber) {
             System.out.printf("%s угадал число %d с %d-й попытки%n",
                     player.getName(), secretNumber, player.getCurrAttempt());
@@ -84,9 +85,6 @@ public class GuessNumber {
         System.out.printf("%d %s того, что загадал компьютер%n", playerGuess, hint);
         System.out.printf("Игрок %s не угадал число. Ход переходит к следующему игроку%n",
                 player.getName());
-        if (player.getCurrAttempt() == Player.MAX_ATTEMPTS) {
-            System.out.println("У " + player.getName() + " закончились попытки");
-        }
         return false;
     }
 
