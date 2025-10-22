@@ -47,6 +47,10 @@ public class Player {
         numbers[currAttempt - 1] = number;
     }
 
+    public int getCurrNumber() {
+        return numbers[currAttempt - 1];
+    }
+
     public boolean hasAttempts() {
         return currAttempt < MAX_ATTEMPTS;
     }
