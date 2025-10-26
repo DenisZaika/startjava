@@ -60,7 +60,7 @@ public class TypewriterEffect {
         return String.join(" ", words);
     }
 
-    private static void type(String originText) throws InterruptedException {
+    public static void type(String originText) throws InterruptedException {
         if (originText.isEmpty()) {
             return;
         }
