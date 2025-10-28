@@ -4,47 +4,49 @@ import java.time.Year;
 
 @SuppressWarnings("ClassCanBeRecord")
 public class Book {
-    public static final int MIN_YEAR = 1800;
-    public static final int CURR_YEAR = 2025;
+    private static final Year MIN_YEAR = Year.of(1800);
+    private static final Year CURR_YEAR = Year.now();
 
     private final String author;
-    private final String name;
-    private final Year publicationYear;
+    private final String title;
+    private final Year publishedYear;
 
-    public Book(String author, String name, String publicationYear) {
-        validateBookAttributes(author, name, publicationYear);
+    public Book(String author, String title, String publishedYear) {
+        validateBookAttributes(author, title, publishedYear);
         this.author = author;
-        this.name = name;
-        this.publicationYear = Year.of(Integer.parseInt(publicationYear));
+        this.title = title;
+        this.publishedYear = Year.of(Integer.parseInt(publishedYear));
     }
 
-    public String getName() {
-        return name;
-    }
-
-    private void validateBookAttributes(String author, String name, String publicationYear)
+    private void validateBookAttributes(String author, String title, String publishedYear)
             throws IllegalArgumentException {
         validateNotEmpty(author, "имя автора");
-        validateNotEmpty(name, "название книги");
-        validateNotEmpty(publicationYear, "год издания");
-        if (!isValidYear(publicationYear)) {
-            throw new IllegalArgumentException("Ошибка: год издания должен быть между 1800 и текущим");
+        validateNotEmpty(title, "название книги");
+        validateNotEmpty(publishedYear, "год издания");
+        if (!isValidYear(publishedYear)) {
+            throw new IllegalArgumentException("Ошибка: год издания должен быть между " + MIN_YEAR +
+                    " и текущим " + CURR_YEAR);
         }
     }
 
-    private void validateNotEmpty(String attributeValue, String fieldName) throws IllegalArgumentException {
-        if (attributeValue == null || attributeValue.isEmpty()) {
-            throw new IllegalArgumentException("Ошибка: " + fieldName + " не может быть пустым");
+    private void validateNotEmpty(String attributeValue, String attributeName)
+            throws IllegalArgumentException {
+        if (attributeValue == null || attributeValue.isBlank()) {
+            throw new IllegalArgumentException("Ошибка: " + attributeName + " не может быть пустым");
         }
     }
 
-    private boolean isValidYear(String yearStr) {
-        int yearInt = Integer.parseInt(yearStr);
-        return yearInt >= MIN_YEAR && yearInt <= CURR_YEAR;
+    private boolean isValidYear(String publishedYearStr) {
+        Year publishedYear = Year.of(Integer.parseInt(publishedYearStr));
+        return publishedYear.compareTo(MIN_YEAR) >= 0 && publishedYear.compareTo(CURR_YEAR) <= 0;
+    }
+
+    public String getTitle() {
+        return title;
     }
 
     public String toString() {
-        return author + ", " + name + ", " + publicationYear;
+        return author + ", " + title + ", " + publishedYear;
     }
 }
 
