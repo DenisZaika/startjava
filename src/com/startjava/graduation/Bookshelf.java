@@ -3,15 +3,17 @@ package com.startjava.graduation;
 import java.util.Arrays;
 
 public class Bookshelf {
-    public static final int TOTAL_SHELVES = 10;
+    private static final int TOTAL_SHELVES = 10;
 
     private final Book[] books;
 
     private int bookCount;
+    private int length;
 
     public Bookshelf() {
         books = new Book[TOTAL_SHELVES];
         bookCount = 0;
+        length = 0;
     }
 
     public Book[] getBooks() {
@@ -22,40 +24,55 @@ public class Bookshelf {
         return bookCount;
     }
 
+    public int getLength() {
+        return length;
+    }
+
     public int getFreeShelfCount() {
         return TOTAL_SHELVES - bookCount;
     }
 
-    public String find(String name) {
-        int position = findBookPosition(name);
-        if (position != -1) {
-            System.out.println("\nКнига успешно найдена!");
-            return "Найденная книга: " + books[position].toString();
+    public int add(Book book) {
+        if (bookCount >= TOTAL_SHELVES) {
+            return 0;
         }
-        return "\nОшибка: книги \"" + name + "\" в шкафу нет!";
+        books[bookCount++] = book;
+        calcLength();
+        return 1;
     }
 
-    public void add(Book book) {
-        books[bookCount] = book;
-        bookCount++;
-        System.out.println("\nКнига успешно добавлена!");
+    private void calcLength() {
+        for (int i = 0; i < bookCount; i++) {
+            if (books[i].toString().length() > length) {
+                length = books[i].toString().length();
+            }
+        }
     }
 
-    public void delete(String name) {
-        int position = findBookPosition(name);
+    public Book find(String title) {
+        int position = findBookPosition(title);
         if (position != -1) {
-            System.out.println("\nКнига \"" + books[position].toString() + "\" успешно удалена!");
+            return books[position];
+        }
+        return null;
+    }
+
+    public Book delete(String title) {
+        int position = findBookPosition(title);
+        if (position != -1) {
+            final Book foundBook = books[position];
             System.arraycopy(books, position + 1, books, position, bookCount - position - 1);
             books[bookCount - 1] = null;
             bookCount--;
-        } else {
-            System.out.println("\nОшибка: указанная книга не удалена, \"" + name + "\" в шкафу отсутствует!");
+            calcLength();
+            return foundBook;
         }
+        return null;
     }
 
-    private int findBookPosition(String name) {
+    private int findBookPosition(String title) {
         for (int i = 0; i < bookCount; i++) {
-            if (books[i].getName().equals(name)) {
+            if (books[i].getTitle().equals(title)) {
                 return i;
             }
         }
@@ -63,8 +80,8 @@ public class Bookshelf {
     }
 
     public void clear() {
-        Arrays.fill(books, null);
+        Arrays.fill(books, 0, bookCount, null);
         bookCount = 0;
-        System.out.println("\nШкаф успешно очищен от всех книг!");
+        length = 0;
     }
 }
