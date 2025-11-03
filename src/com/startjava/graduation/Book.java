@@ -5,40 +5,39 @@ import java.time.Year;
 @SuppressWarnings("ClassCanBeRecord")
 public class Book {
     private static final Year MIN_YEAR = Year.of(1800);
-    private static final Year CURR_YEAR = Year.now();
 
     private final String author;
     private final String title;
     private final Year publishedYear;
 
-    public Book(String author, String title, String publishedYear) {
+    public Book(String author, String title, Year publishedYear) {
         validateBookAttributes(author, title, publishedYear);
         this.author = author;
         this.title = title;
-        this.publishedYear = Year.of(Integer.parseInt(publishedYear));
+        this.publishedYear = publishedYear;
     }
 
-    private void validateBookAttributes(String author, String title, String publishedYear)
-            throws IllegalArgumentException {
+    private void validateBookAttributes(String author, String title, Year publishedYear) {
         validateNotEmpty(author, "имя автора");
         validateNotEmpty(title, "название книги");
-        validateNotEmpty(publishedYear, "год издания");
-        if (!isValidYear(publishedYear)) {
-            throw new IllegalArgumentException("Ошибка: год издания должен быть между " + MIN_YEAR +
-                    " и текущим " + CURR_YEAR);
-        }
+        validateYear(publishedYear);
     }
 
-    private void validateNotEmpty(String attributeValue, String attributeName)
-            throws IllegalArgumentException {
+    private void validateNotEmpty(String attributeValue, String attributeName) {
         if (attributeValue == null || attributeValue.isBlank()) {
             throw new IllegalArgumentException("Ошибка: " + attributeName + " не может быть пустым");
         }
     }
 
-    private boolean isValidYear(String publishedYearStr) {
-        Year publishedYear = Year.of(Integer.parseInt(publishedYearStr));
-        return publishedYear.compareTo(MIN_YEAR) >= 0 && publishedYear.compareTo(CURR_YEAR) <= 0;
+    private void validateYear(Year publishedYear) {
+        if (!isValidYear(publishedYear)) {
+            throw new IllegalArgumentException("Ошибка: год издания должен быть между " + MIN_YEAR +
+                    " и текущим " + Year.now());
+        }
+    }
+
+    private boolean isValidYear(Year publishedYear) {
+        return publishedYear.isAfter(MIN_YEAR) && publishedYear.isBefore(Year.now());
     }
 
     public String getTitle() {
