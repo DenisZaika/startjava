@@ -32,21 +32,13 @@ public class Bookshelf {
         return TOTAL_SHELVES - bookCount;
     }
 
-    public int add(Book book) {
+    public boolean add(Book book) {
         if (bookCount >= TOTAL_SHELVES) {
-            return 0;
+            return false;
         }
         books[bookCount++] = book;
         calcLength();
-        return 1;
-    }
-
-    private void calcLength() {
-        for (int i = 0; i < bookCount; i++) {
-            if (books[i].toString().length() > length) {
-                length = books[i].toString().length();
-            }
-        }
+        return true;
     }
 
     public Book find(String title) {
@@ -68,6 +60,12 @@ public class Bookshelf {
             return foundBook;
         }
         return null;
+    }
+
+    private void calcLength() {
+        for (int i = 0; i < bookCount; i++) {
+            length = Math.max(length, books[i].toString().length());
+        }
     }
 
     private int findBookPosition(String title) {
