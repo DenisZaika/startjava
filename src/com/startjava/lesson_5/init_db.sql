@@ -5,16 +5,16 @@
 DROP TABLE IF EXISTS jaegers;
 
 \echo 'Создание таблицы jaegers'
-CREATE TABLE jaegers(
-    jaeger_id  SERIAL PRIMARY KEY,
-	model_name TEXT,
-	mark       INT,
-	height     DECIMAL(4, 2),
-	weight     INT,
-	status     VARCHAR(10),
-	origin     TEXT,
-	launch     DATE,
-	kaiju_kill INT
+CREATE TABLE jaegers (
+    id         SERIAL PRIMARY KEY,
+    model_name TEXT,
+    mark       INT,
+    height     DECIMAL(4, 2),
+    weight     NUMERIC,
+    status     VARCHAR(10),
+    origin     TEXT,
+    launch     DATE,
+    kaiju_kill INT
 );
 
 \echo 'Запускаем файл populate.sql'
